@@ -26,7 +26,7 @@ export const getCategory = id => {
 }
 
 // Mock `Categories` data
-addCategory('Argentina');
+addCategory('U.S.');
 addCategory('Baiana');
 addCategory('Bebidas');
 addCategory('Cafeteria');

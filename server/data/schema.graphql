@@ -13,6 +13,7 @@ type Category implements Node {
   """The ID of an object"""
   id: ID!
   name: String
+  products(after: String, first: Int, before: String, last: Int): ProductConnection
 }
 
 """A connection to a list of items."""
@@ -91,6 +92,35 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: String
+}
+
+type Product implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  categoryId: Int
+  attributes: [String]
+  image: String
+  description: String
+  quantity: Int
+}
+
+"""A connection to a list of items."""
+type ProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ProductEdge]
+}
+
+"""An edge in a connection."""
+type ProductEdge {
+  """The item at the end of the edge"""
+  node: Product
+
+  """A cursor for use in pagination"""
+  cursor: String!
 }
 
 type Query {

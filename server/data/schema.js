@@ -26,6 +26,7 @@ import {
   User,
   Market,
   Category,
+  Product,
 
   addTodo,
   changeTodoStatus,
@@ -37,6 +38,9 @@ import {
   getMarket,
   getCategory,
   getCategories,
+  getProduct,
+  getProducts,
+  getProductsByCategory,
 
   markAllTodos,
   removeCompletedTodos,
@@ -47,12 +51,14 @@ import {
 const { nodeInterface, nodeField } = nodeDefinitions(
   globalId => {
     const { type, id } = fromGlobalId(globalId);
+    console.log(fromGlobalId(globalId));
 
     switch(type) {
       case 'Todo': return getTodo(id);
       case 'User': return getUser(id);
       case 'Market': return getMarket(id);
       case 'Category': return getCategory(id);
+      case 'Product': return getProduct(id);
       default: return null;
     }
   },
@@ -62,6 +68,7 @@ const { nodeInterface, nodeField } = nodeDefinitions(
       case User: return GraphQLUser;
       case Market: return GraphQLMarket;
       case Category: return GraphQLCategory;
+      case Product: return GraphQLProduct;
       default: return null;
     }
   },
@@ -89,26 +96,6 @@ const {
 } = connectionDefinitions({
   name: 'Todo',
   nodeType: GraphQLTodo,
-});
-
-const GraphQLCategory = new GraphQLObjectType({
-  name: 'Category',
-  fields: {
-    id: globalIdField('Category'),
-    name: {
-      type: GraphQLString,
-      resolve: obj => obj.name,
-    },
-  },
-  interfaces: [nodeInterface],
-});
-
-const {
-  connectionType: CategoriesConnection,
-  edgeType: GraphQLCategoryEdge,
-} = connectionDefinitions({
-  name: 'Category',
-  nodeType: GraphQLCategory,
 });
 
 const GraphQLUser = new GraphQLObjectType({
@@ -271,6 +258,71 @@ const GraphQLRenameTodoMutation = mutationWithClientMutationId({
     renameTodo(localTodoId, text);
     return {localTodoId};
   },
+});
+
+const GraphQLProduct = new GraphQLObjectType({
+  name: 'Product',
+  fields: {
+    id: globalIdField('Product'),
+    name: {
+      type: GraphQLString,
+      resolve: obj => obj.name,
+    },
+    categoryId: {
+      type: GraphQLInt,
+      resolve: obj => obj.categoryId,
+    },
+    attributes: {
+      type: new GraphQLList(GraphQLString),
+      resolve: obj => obj.attributes,
+    },
+    image: {
+      type: GraphQLString,
+      resolve: obj => obj.image,
+    },
+    description: {
+      type: GraphQLString,
+      resolve: obj => obj.description,
+    },
+    quantity: {
+      type: GraphQLInt,
+      resolve: obj => obj.quantity,
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
+const {
+  connectionType: ProductsConnection,
+  edgeType: GraphQLProductEdge,
+} = connectionDefinitions({
+  name: 'Product',
+  nodeType: GraphQLProduct,
+});
+
+const GraphQLCategory = new GraphQLObjectType({
+  name: 'Category',
+  fields: {
+    id: globalIdField('Category'),
+    name: {
+      type: GraphQLString,
+      resolve: obj => obj.name,
+    },
+    products: {
+      type: ProductsConnection,
+      args: connectionArgs,
+      resolve: (obj, args) => connectionFromArray(getProductsByCategory(obj.id), args),
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
+const {
+  connectionType: CategoriesConnection,
+  edgeType: GraphQLCategoryEdge,
+} = connectionDefinitions({
+  name: 'Category',
+  nodeType: GraphQLCategory,
 });
 
 const GraphQLMarket = new GraphQLObjectType({
