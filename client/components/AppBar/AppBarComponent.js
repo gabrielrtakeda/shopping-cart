@@ -7,7 +7,7 @@ import Badge from '@material-ui/core/Badge';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-import CartDrawer from '../CartDrawer/CartDrawerComponent'
+import CartDrawer from '../CartDrawer'
 import SearchBar from './SearchBarComponent'
 
 class AppBarComponent extends React.Component {
