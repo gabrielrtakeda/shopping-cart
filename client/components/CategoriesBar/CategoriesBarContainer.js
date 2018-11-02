@@ -1,14 +1,21 @@
-// import {
-//   createFragmentContainer,
-//   graphql,
-// } from 'react-relay/compat';
-// import App from './AppComponent';
-// import Footer from '../Footer/FooterContainer';
+import {
+  createFragmentContainer,
+  graphql,
+} from 'react-relay';
+import CategoriesBar from './CategoriesBarComponent';
 
-// export default createFragmentContainer(App, {
-//   categories: graphql`
-//     fragment CategoriesBarContainer_categories on Category {
-//       id
-//       name
-//     }`
-// });
+export default createFragmentContainer(CategoriesBar, {
+  market: graphql`
+    fragment CategoriesBarContainer_market on Market {
+      categories (
+        first: 2147483647 # max GraphQLInt
+      ) {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }`
+});

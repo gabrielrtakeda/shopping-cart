@@ -56,6 +56,13 @@ type MarkAllTodosPayload {
   clientMutationId: String
 }
 
+type Market implements Node {
+  """The ID of an object"""
+  id: ID!
+  categories(after: String, first: Int, before: String, last: Int): CategoryConnection
+  categoriesTotalCount: Int
+}
+
 type Mutation {
   addTodo(input: AddTodoInput!): AddTodoPayload
   changeTodoStatus(input: ChangeTodoStatusInput!): ChangeTodoStatusPayload
@@ -89,6 +96,7 @@ type PageInfo {
 type Query {
   viewer: User
   categories: CategoryConnection
+  market: Market
 
   """Fetches an object given its ID"""
   node(

@@ -1,11 +1,10 @@
-import { VIEWER_ID } from '../constants'
+import { MARKET_ID } from '../constants'
 
-export class Market {}
 export class Category {}
 
 export const categoriesById = {};
-export const categoryIdsByUser = {
-  [VIEWER_ID]: [],
+export const categoryIdsByMarket = {
+  [MARKET_ID]: [],
 };
 let nextCategoryId = 0;
 
@@ -14,12 +13,12 @@ export const addCategory = name => {
   category.id = `${nextCategoryId++}`;
   category.name = name;
   categoriesById[category.id] = category;
-  categoryIdsByUser[VIEWER_ID].push(category.id);
+  categoryIdsByMarket[MARKET_ID].push(category.id);
   return category.id;
 }
 
 export const getCategories = () => {
-  return categoryIdsByUser[VIEWER_ID].map(id => categoriesById[id]);
+  return categoryIdsByMarket[MARKET_ID].map(id => categoriesById[id]);
 }
 
 export const getCategory = id => {

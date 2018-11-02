@@ -13,27 +13,17 @@ ReactDOM.render(
     environment={environment}
     query={graphql`
       query appQuery {
-        viewer {
-          ...TodoApp_viewer
-        }
-        categories {
-          edges {
-            node {
-              id
-              name
-            }
-          }
+        market {
+          ...CategoriesBarContainer_market
         }
       }
     `}
     variables={{}}
-    render={({ error, props }) => {
-      console.log('props', props);
-      if (props) {
-        return <App {...props} />;
-      } else {
-        return <div>Loading</div>;
-      }
+    render={(res) => {
+      const { error, props } = res;
+
+      if (props) return <App {...props} />;
+      else return <div>Loading</div>;
     }}
   />,
   document.getElementById('root'),

@@ -24,14 +24,20 @@ import {
 import {
   Todo,
   User,
+  Market,
+  Category,
+
   addTodo,
   changeTodoStatus,
+
   getTodo,
   getTodos,
   getUser,
   getViewer,
+  getMarket,
   getCategory,
   getCategories,
+
   markAllTodos,
   removeCompletedTodos,
   removeTodo,
@@ -45,6 +51,7 @@ const { nodeInterface, nodeField } = nodeDefinitions(
     switch(type) {
       case 'Todo': return getTodo(id);
       case 'User': return getUser(id);
+      case 'Market': return getMarket(id);
       case 'Category': return getCategory(id);
       default: return null;
     }
@@ -53,6 +60,7 @@ const { nodeInterface, nodeField } = nodeDefinitions(
     switch(obj.constructor) {
       case Todo: return GraphQLTodo;
       case User: return GraphQLUser;
+      case Market: return GraphQLMarket;
       case Category: return GraphQLCategory;
       default: return null;
     }
@@ -129,22 +137,6 @@ const GraphQLUser = new GraphQLObjectType({
     },
   },
   interfaces: [nodeInterface],
-});
-
-const Query = new GraphQLObjectType({
-  name: 'Query',
-  fields: {
-    viewer: {
-      type: GraphQLUser,
-      resolve: () => getViewer(),
-    },
-    categories: {
-      type: CategoriesConnection,
-      resolve: (obj, args) =>
-        connectionFromArray(getCategories(), args),
-    },
-    node: nodeField,
-  },
 });
 
 const GraphQLAddTodoMutation = mutationWithClientMutationId({
@@ -278,6 +270,43 @@ const GraphQLRenameTodoMutation = mutationWithClientMutationId({
     const localTodoId = fromGlobalId(id).id;
     renameTodo(localTodoId, text);
     return {localTodoId};
+  },
+});
+
+const GraphQLMarket = new GraphQLObjectType({
+  name: 'Market',
+  fields: {
+    id: globalIdField('Market'),
+    categories: {
+      type: CategoriesConnection,
+      args: connectionArgs,
+      resolve: (obj, args) => connectionFromArray(getCategories(), args),
+    },
+    categoriesTotalCount: {
+      type: GraphQLInt,
+      resolve: () => getCategories().length,
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
+const Query = new GraphQLObjectType({
+  name: 'Query',
+  fields: {
+    viewer: {
+      type: GraphQLUser,
+      resolve: () => getViewer(),
+    },
+    categories: {
+      type: CategoriesConnection,
+      resolve: (obj, args) =>
+        connectionFromArray(getCategories(), args),
+    },
+    market: {
+      type: GraphQLMarket,
+      resolve: () => getMarket(),
+    },
+    node: nodeField,
   },
 });
 

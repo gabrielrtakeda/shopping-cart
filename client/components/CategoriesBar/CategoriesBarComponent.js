@@ -41,7 +41,7 @@ class CategoriesBar extends React.Component {
   };
 
   render() {
-    const { classes, data } = this.props;
+    const { classes, market } = this.props;
     const { value } = this.state;
 
     return (
@@ -55,7 +55,7 @@ class CategoriesBar extends React.Component {
             textColor="primary"
             scrollable
           >
-            {data.edges.map(({ node }) => (
+            {market.categories.edges.map(({ node }) => (
               <Tab
                 key={node.id}
                 label={node.name}

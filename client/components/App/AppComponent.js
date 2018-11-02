@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles';
 import { theme } from '../../services/material-ui/theme'
 import AppBar from '../AppBar/AppBarComponent'
-import CategoriesBar from '../CategoriesBar/CategoriesBarComponent'
+import CategoriesBar from '../CategoriesBar/CategoriesBarContainer'
 import Layout from '../Layout'
 import ProductCard from '../Products/ProductCard'
 
@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <AppBar />
-        <CategoriesBar data={this.props.categories} />
+        <CategoriesBar market={this.props.market} />
 
         <Layout>
           <div style={{
