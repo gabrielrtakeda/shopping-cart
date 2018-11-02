@@ -10,22 +10,19 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import RestaurantIcon from '@material-ui/icons/Restaurant';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import CartDrawer from '../CartDrawer/CartDrawerComponent'
 
 const styles = theme => ({
   root: {
     width: '100%',
   },
-  grow: {
-    flexGrow: 1,
-  },
   menuButton: {
-    marginLeft: -12,
     marginRight: 20,
   },
   title: {
@@ -33,6 +30,7 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    marginRight: theme.spacing.unit * 3,
   },
   search: {
     position: 'relative',
@@ -41,13 +39,12 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing.unit * 3,
       width: 'auto',
     },
+    flexGrow: 1,
   },
   searchIcon: {
     width: theme.spacing.unit * 9,
@@ -79,6 +76,9 @@ const styles = theme => ({
       display: 'flex',
     },
   },
+  shoppingCartMenu: {
+    marginLeft: theme.spacing.unit * 3,
+  },
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
@@ -91,10 +91,15 @@ class PrimarySearchAppBar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    openDrawer: false,
   };
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleDrawerOpen = openDrawer => {
+    this.setState({ openDrawer });
   };
 
   handleMenuClose = () => {
@@ -142,10 +147,10 @@ class PrimarySearchAppBar extends React.Component {
         <AppBar position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon />
+              <RestaurantIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Shopping Cart
+              JusMarket
             </Typography>
             <div className={classes.grow} />
             <div className={classes.search}>
@@ -160,35 +165,20 @@ class PrimarySearchAppBar extends React.Component {
                 }}
               />
             </div>
-            <div className={classes.sectionDesktop}>
-              <IconButton color="inherit" onClick={this.handleProfileMenuOpen}>
+            <div className={classes.shoppingCartMenu}>
+              <IconButton color="inherit" onClick={this.handleDrawerOpen}>
                 <Badge badgeContent={4} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
-              </IconButton>
-              <IconButton color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </div>
-            <div className={classes.sectionMobile}>
-              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                <MoreIcon />
               </IconButton>
             </div>
           </Toolbar>
         </AppBar>
         {renderMenu}
-        {renderMobileMenu}
+        <CartDrawer
+          open={this.state.openDrawer}
+          handleOpen={this.handleDrawerOpen}
+        />
       </div>
     );
   }
