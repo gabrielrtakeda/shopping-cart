@@ -10,7 +10,7 @@ const APP_PORT = 3000;
 // Serve the Relay app
 const compiler = webpack({
   mode: 'development',
-  entry: ['whatwg-fetch', path.resolve(__dirname, '..', 'client', 'app.js')],
+  entry: ['whatwg-fetch', path.resolve(__dirname, '..', 'client', 'index.js')],
   module: {
     rules: [
       {
@@ -31,6 +31,7 @@ const compiler = webpack({
     path: '/',
   },
 });
+
 const app = new WebpackDevServer(compiler, {
   contentBase: '/public/',
   publicPath: '/',

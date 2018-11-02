@@ -1,12 +1,27 @@
-import {
-  createFragmentContainer,
-  graphql,
-} from 'react-relay/compat';
-import App from './AppComponent';
+import React from 'react';
+import { QueryRenderer, graphql } from 'react-relay';
 
-export default createFragmentContainer(App, {
-  market: graphql`
-    fragment AppContainer_market on Market {
-      ...CategoriesBarContainer_categories
-    }`
-});
+import environment from '../../services/relay/environment';
+import AppComponent from './AppComponent';
+
+const AppContainerQuery = graphql`
+  query AppContainerQuery {
+    market {
+      ...CategoriesBarContainer_market
+    }
+  }
+`;
+
+const AppContainer = () => (
+  <QueryRenderer
+    environment={environment}
+    query={AppContainerQuery}
+    variables={{}}
+    render={({ error, props }) => props ?
+      <AppComponent {...props} /> :
+      <div>Loading</div>
+    }
+  />
+);
+
+export default AppContainer;

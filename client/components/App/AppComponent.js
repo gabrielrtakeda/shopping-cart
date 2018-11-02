@@ -1,64 +1,30 @@
 import React from 'react'
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles';
-import { theme } from '../../services/material-ui/theme'
+
 import AppBar from '../AppBar/AppBarComponent'
 import CategoriesBar from '../CategoriesBar/CategoriesBarContainer'
 import Layout from '../Layout'
 import ProductCard from '../Products/ProductCard'
+import AppHeroComponent from './AppHeroComponent'
 
-class App extends React.Component {
-  render() {
-    return (
-      <MuiThemeProvider theme={theme}>
-        <AppBar />
-        <CategoriesBar market={this.props.market} />
+const AppComponent = ({ market }) => (
+  <React.Fragment>
+    <AppBar />
+    <CategoriesBar market={market} />
 
-        <Layout>
-          <div style={{
-            width: '100%',
-            height: 300,
-            background: 'url(http://www.skinos-ilivatos.gr/images/headers/gastronomy-kefalonia.jpg)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center',
-            borderRadius: 8 / 2,
-            marginBottom: 8 * 2,
-            display: 'flex',
-            overflow: 'hidden',
-          }}>
-            <div style={{
-              backgroundColor: '#000',
-              color: '#fff',
-              padding: `${8 * 4}px ${8 * 8}px`,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-              <Typography variant="h3" color='inherit' >
-                BlackKnife
-              </Typography>
-              <Typography variant="h1" color='inherit'>
-                50%
-              </Typography>
-              <Typography variant="h5" color='inherit'>
-                de cashback
-              </Typography>
-            </div>
-          </div>
-          <Grid container xs={12} spacing={16}>
-            {new Array(5).fill('').map((x, i) => (
-              <Grid item>
-                <ProductCard key={i} />
-              </Grid>
-            ))}
+    <Layout>
+      <AppHeroComponent />
+
+      <Grid container xs={12} spacing={16}>
+        {new Array(5).fill('').map((x, i) => (
+          <Grid item>
+            <ProductCard key={i} />
           </Grid>
-        </Layout>
-      </MuiThemeProvider>
-    );
-  }
-}
+        ))}
+      </Grid>
+    </Layout>
+  </React.Fragment>
+)
 
-export default App;
+export default AppComponent;
