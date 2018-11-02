@@ -10,8 +10,8 @@ export default createFragmentContainer(CategoriesBar, {
       categories (
         first: 2147483647 # max GraphQLInt
       ) {
-        edges {
-          node {
+        list: edges {
+          category: node {
             id
             name
           }

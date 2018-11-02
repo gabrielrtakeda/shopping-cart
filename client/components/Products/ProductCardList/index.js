@@ -1,3 +1,3 @@
-import ProductCardList from './ProductCardList'
+import ProductCardListContainer from './ProductCardListContainer'
 
-export default ProductCardList
+export default ProductCardListContainer

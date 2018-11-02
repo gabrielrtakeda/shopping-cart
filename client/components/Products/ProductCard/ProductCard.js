@@ -23,7 +23,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 class RecipeReviewCard extends React.Component {
   render() {
-    const { classes, text } = this.props;
+    const { classes, data } = this.props;
 
     return (
       <Grid item>
@@ -31,16 +31,20 @@ class RecipeReviewCard extends React.Component {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image='https://material-ui.com/static/images/cards/paella.jpg'
-              title="Paella dish"
+              image={data.image}
+              title={data.name}
             />
 
             <CardContent>
-              <Typography gutterBottom variant="subtitle1">
-                Standard license
+              <Typography gutterBottom variant="subtitle1" noWrap>
+                {data.name}
               </Typography>
-              <Typography gutterBottom>Full resolution 1920x1080 • JPEG</Typography>
-              <Typography color="textSecondary">ID: 1030114</Typography>
+              <Typography gutterBottom>{data.categoryId}</Typography>
+              {data.attributes.map(attribute => (
+                <Typography color="textSecondary">
+                  {attribute}
+                </Typography>
+              ))}
             </CardContent>
           </CardActionArea>
 
@@ -56,8 +60,19 @@ class RecipeReviewCard extends React.Component {
   }
 }
 
+const { object, shape, string, number, arrayOf } = PropTypes;
+
 RecipeReviewCard.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: object.isRequired,
+  data: shape({
+    id: string,
+    name: string,
+    categoryId: number,
+    attributes: arrayOf(string),
+    image: string,
+    description: string,
+    quantity: number,
+  }).isRequired,
 };
 
 export default RecipeReviewCard;

@@ -32,33 +32,23 @@ const styles = theme => ({
 });
 
 class CategoriesBar extends React.Component {
-  state = {
-    value: 0,
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
   render() {
     const { classes, market } = this.props;
-    const { value } = this.state;
+    console.log('CategoriesBar', market);
 
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Tabs
             classes={classes.tabs}
-            value={value}
-            onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
             scrollable
           >
-            {market.categories.edges.map(({ node }) => (
+            {market.categories.list.map(({ category }) => (
               <Tab
-                key={node.id}
-                label={node.name}
+                key={category.id}
+                label={category.name}
               />
             ))}
           </Tabs>

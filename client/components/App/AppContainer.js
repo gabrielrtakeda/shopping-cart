@@ -8,6 +8,7 @@ const AppContainerQuery = graphql`
   query AppContainerQuery {
     market {
       ...CategoriesBarContainer_market
+      ...ProductCardListContainer_market
     }
   }
 `;

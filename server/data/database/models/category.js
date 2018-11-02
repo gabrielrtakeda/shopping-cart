@@ -27,7 +27,7 @@ export const getCategory = id => {
 
 // Mock `Categories` data
 addCategory('U.S.');
-addCategory('Baiana');
+addCategory('Belgium');
 addCategory('Bebidas');
 addCategory('Cafeteria');
 addCategory('Carnes');
