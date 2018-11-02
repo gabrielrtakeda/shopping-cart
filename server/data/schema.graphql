@@ -9,6 +9,30 @@ type AddTodoPayload {
   clientMutationId: String
 }
 
+type Category implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+}
+
+"""A connection to a list of items."""
+type CategoryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CategoryEdge]
+}
+
+"""An edge in a connection."""
+type CategoryEdge {
+  """The item at the end of the edge"""
+  node: Category
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
 input ChangeTodoStatusInput {
   complete: Boolean!
   id: ID!
@@ -64,6 +88,7 @@ type PageInfo {
 
 type Query {
   viewer: User
+  categories: CategoryConnection
 
   """Fetches an object given its ID"""
   node(

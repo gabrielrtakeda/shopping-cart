@@ -30,6 +30,8 @@ import {
   getTodos,
   getUser,
   getViewer,
+  getCategory,
+  getCategories,
   markAllTodos,
   removeCompletedTodos,
   removeTodo,
@@ -38,21 +40,22 @@ import {
 
 const { nodeInterface, nodeField } = nodeDefinitions(
   globalId => {
-    const {type, id} = fromGlobalId(globalId);
-    if (type === 'Todo') {
-      return getTodo(id);
-    } else if (type === 'User') {
-      return getUser(id);
+    const { type, id } = fromGlobalId(globalId);
+
+    switch(type) {
+      case 'Todo': return getTodo(id);
+      case 'User': return getUser(id);
+      case 'Category': return getCategory(id);
+      default: return null;
     }
-    return null;
   },
   obj => {
-    if (obj instanceof Todo) {
-      return GraphQLTodo;
-    } else if (obj instanceof User) {
-      return GraphQLUser;
+    switch(obj.constructor) {
+      case Todo: return GraphQLTodo;
+      case User: return GraphQLUser;
+      case Category: return GraphQLCategory;
+      default: return null;
     }
-    return null;
   },
 );
 
@@ -78,6 +81,26 @@ const {
 } = connectionDefinitions({
   name: 'Todo',
   nodeType: GraphQLTodo,
+});
+
+const GraphQLCategory = new GraphQLObjectType({
+  name: 'Category',
+  fields: {
+    id: globalIdField('Category'),
+    name: {
+      type: GraphQLString,
+      resolve: obj => obj.name,
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
+const {
+  connectionType: CategoriesConnection,
+  edgeType: GraphQLCategoryEdge,
+} = connectionDefinitions({
+  name: 'Category',
+  nodeType: GraphQLCategory,
 });
 
 const GraphQLUser = new GraphQLObjectType({
@@ -114,6 +137,11 @@ const Query = new GraphQLObjectType({
     viewer: {
       type: GraphQLUser,
       resolve: () => getViewer(),
+    },
+    categories: {
+      type: CategoriesConnection,
+      resolve: (obj, args) =>
+        connectionFromArray(getCategories(), args),
     },
     node: nodeField,
   },

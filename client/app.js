@@ -16,12 +16,21 @@ ReactDOM.render(
         viewer {
           ...TodoApp_viewer
         }
+        categories {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
       }
     `}
     variables={{}}
-    render={({error, props}) => {
+    render={({ error, props }) => {
+      console.log('props', props);
       if (props) {
-        return <App />;
+        return <App {...props} />;
       } else {
         return <div>Loading</div>;
       }

@@ -41,7 +41,7 @@ class CategoriesBar extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, data } = this.props;
     const { value } = this.state;
 
     return (
@@ -55,17 +55,12 @@ class CategoriesBar extends React.Component {
             textColor="primary"
             scrollable
           >
-            <Tab label="Argentina" />
-            <Tab label="Baiana" />
-            <Tab label="Bebidas" />
-            <Tab label="Cafeteria" />
-            <Tab label="Carnes" />
-            <Tab label="Casa de Sucos" />
-            <Tab label="Comida Alemã" />
-            <Tab label="Comida Árabe" />
-            <Tab label="Comida Asiática" />
-            <Tab label="Comida Brasileira" />
-            <Tab label="Comida Contemporânea" />
+            {data.edges.map(({ node }) => (
+              <Tab
+                key={node.id}
+                label={node.name}
+              />
+            ))}
           </Tabs>
         </AppBar>
       </div>

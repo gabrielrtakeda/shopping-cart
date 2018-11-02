@@ -1,5 +1,6 @@
 export class Todo {}
 export class User {}
+export class Category {}
 
 // Mock authenticated ID
 const VIEWER_ID = 'me';
@@ -19,6 +20,7 @@ const todoIdsByUser = {
 let nextTodoId = 0;
 addTodo('Taste JavaScript', true);
 addTodo('Buy a unicorn', false);
+addTodo('Buy a camel', false);
 
 export function addTodo(text, complete) {
   const todo = new Todo();
@@ -83,4 +85,39 @@ export function removeCompletedTodos() {
 export function renameTodo(id, text) {
   const todo = getTodo(id);
   todo.text = text;
+}
+
+// Mock `Categories` data
+const categoriesById = {};
+const categoryIdsByUser = {
+  [VIEWER_ID]: [],
+};
+let nextCategoryId = 0;
+addCategory('Argentina');
+addCategory('Baiana');
+addCategory('Bebidas');
+addCategory('Cafeteria');
+addCategory('Carnes');
+addCategory('Casa de Sucos');
+addCategory('Comida Alemã');
+addCategory('Comida Árabe');
+addCategory('Comida Asiática');
+addCategory('Comida Brasileira');
+addCategory('Comida Contemporânea');
+
+export function addCategory(name) {
+  const category = new Category();
+  category.id = `${nextCategoryId++}`;
+  category.name = name;
+  categoriesById[category.id] = category;
+  categoryIdsByUser[VIEWER_ID].push(category.id);
+  return category.id;
+}
+
+export function getCategories() {
+  return categoryIdsByUser[VIEWER_ID].map(id => categoriesById[id]);
+}
+
+export function getCategory(id) {
+  return categoriesById[id];
 }

@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <AppBar />
-        <CategoriesBar />
+        <CategoriesBar data={this.props.categories} />
 
         <Layout>
           <div style={{
