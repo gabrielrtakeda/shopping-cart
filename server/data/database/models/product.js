@@ -41,7 +41,9 @@ export const getProducts = () => {
 };
 
 export const getProductsByCategory = categoryId => {
-  return productIdsByCategory[categoryId].map(id => productsById[id]);
+  return categoryId === 'all' ?
+    getProducts() :
+    productIdsByCategory[categoryId].map(id => productsById[id]);
 };
 
 // Mock `Product` data

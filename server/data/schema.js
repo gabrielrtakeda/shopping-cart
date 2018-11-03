@@ -51,7 +51,6 @@ import {
 const { nodeInterface, nodeField } = nodeDefinitions(
   globalId => {
     const { type, id } = fromGlobalId(globalId);
-    console.log(fromGlobalId(globalId));
 
     switch(type) {
       case 'Todo': return getTodo(id);
@@ -340,8 +339,19 @@ const GraphQLMarket = new GraphQLObjectType({
     },
     products: {
       type: ProductsConnection,
-      args: connectionArgs,
-      resolve: (obj, args) => connectionFromArray(getProducts(), args),
+      args: {
+        categoryId: {
+          type: GraphQLString,
+          defaultValue: 'all',
+        },
+        ...connectionArgs,
+      },
+      resolve: (obj, { categoryId, ...args }) => {
+        const { type, id } = fromGlobalId(categoryId);
+        return (
+          connectionFromArray(getProductsByCategory(type ? id : 'all'), args)
+        );
+      },
     },
   },
   interfaces: [nodeInterface],

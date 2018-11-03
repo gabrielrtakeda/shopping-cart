@@ -52,5 +52,5 @@ app.use(
 );
 
 app.listen(APP_PORT, () => {
-  console.log(`App is now running on http://localhost:${APP_PORT}`);
+  console.info(`App is now running on http://localhost:${APP_PORT}`);
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
 
-import Hero from '../Hero'
+import Hero from '../../Hero'
 
 const styles = theme => ({
   root: {
@@ -20,7 +20,7 @@ const AppHeroComponent = ({ classes }) => (
   <Hero image='https://goo.gl/C3K7g9'>
     <div className={classes.root}>
       <Typography variant="h3" color='inherit' >
-        BlackKnife
+        BlackFriday
       </Typography>
       <Typography variant="h1" color='inherit'>
         50%

@@ -62,7 +62,7 @@ type Market implements Node {
   id: ID!
   categories(after: String, first: Int, before: String, last: Int): CategoryConnection
   categoriesTotalCount: Int
-  products(after: String, first: Int, before: String, last: Int): ProductConnection
+  products(categoryId: String = "all", after: String, first: Int, before: String, last: Int): ProductConnection
 }
 
 type Mutation {
