@@ -1,4 +1,5 @@
 import { CART_ID } from '../constants'
+import { getProduct } from '../../database'
 
 let nextCartItemId = 0;
 export class CartItem {}
@@ -25,6 +26,20 @@ export const getCartItems = () => {
 export const getCartItem = id => {
   return itemById[id];
 }
+
+export const getCartItemsTotalPrice = () => {
+  let total = 0;
+  const products = getCartItems().forEach(item => {
+    const { price } = getProduct(item.productId);
+    total += (price.sale ? price.sale : price.default) * item.quantity;
+  });
+
+  return total;
+};
+
+export const getCartItemsQuantity = () => {
+  return getCartItems().map(item => item.quantity).reduce((acc, cur) => acc + cur);
+};
 
 // Mock `CartItems` data
 addCartItem(0, 1);

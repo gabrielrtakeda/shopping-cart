@@ -13,6 +13,8 @@ type Cart implements Node {
   """The ID of an object"""
   id: ID!
   items(after: String, first: Int, before: String, last: Int): CartItemConnection
+  totalItemsQuantity: Int
+  totalItemsPrice: Float
 }
 
 type CartItem implements Node {

@@ -47,6 +47,8 @@ import {
   getCart,
   getCartItem,
   getCartItems,
+  getCartItemsTotalPrice,
+  getCartItemsQuantity,
 
   markAllTodos,
   removeCompletedTodos,
@@ -401,6 +403,14 @@ const GraphQLCart = new GraphQLObjectType({
       type: CartItemsConnection,
       args: connectionArgs,
       resolve: (obj, args) => connectionFromArray(getCartItems(), args),
+    },
+    totalItemsQuantity: {
+      type: GraphQLInt,
+      resolve: () => getCartItemsQuantity(),
+    },
+    totalItemsPrice: {
+      type: GraphQLFloat,
+      resolve: () => getCartItemsTotalPrice()
     },
   },
   interfaces: [nodeInterface],
