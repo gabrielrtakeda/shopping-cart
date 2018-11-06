@@ -106,6 +106,7 @@ type Mutation {
   removeCompletedTodos(input: RemoveCompletedTodosInput!): RemoveCompletedTodosPayload
   removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
   renameTodo(input: RenameTodoInput!): RenameTodoPayload
+  updateProductInTheCart(input: UpdateProductInTheCartInput!): UpdateProductInTheCartPayload
 }
 
 """An object with an ID"""
@@ -239,6 +240,17 @@ type TodoEdge {
 
   """A cursor for use in pagination"""
   cursor: String!
+}
+
+input UpdateProductInTheCartInput {
+  productId: ID!
+  quantity: Int!
+  clientMutationId: String
+}
+
+type UpdateProductInTheCartPayload {
+  item: CartItem
+  clientMutationId: String
 }
 
 type User implements Node {

@@ -54,6 +54,7 @@ import {
   removeCompletedTodos,
   removeTodo,
   renameTodo,
+  updateProductInTheCart,
 } from './database';
 
 const { nodeInterface, nodeField } = nodeDefinitions(
@@ -472,6 +473,25 @@ const GraphQLMarket = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
+const GraphQLUpdateProductInTheCartMutation = mutationWithClientMutationId({
+  name: 'UpdateProductInTheCart',
+  inputFields: {
+    productId: { type: new GraphQLNonNull(GraphQLID) },
+    quantity: { type: new GraphQLNonNull(GraphQLInt) },
+  },
+  outputFields: {
+    item: {
+      type: GraphQLCartItem,
+      resolve: ({ itemUpdated }) => itemUpdated,
+    },
+  },
+  mutateAndGetPayload: ({ productId, quantity }) => {
+    const rawProductId = fromGlobalId(productId).id;
+    const itemUpdated = updateProductInTheCart(Number(rawProductId), quantity);
+    return { itemUpdated };
+  },
+});
+
 const Query = new GraphQLObjectType({
   name: 'Query',
   fields: {
@@ -505,6 +525,7 @@ const Mutation = new GraphQLObjectType({
     removeCompletedTodos: GraphQLRemoveCompletedTodosMutation,
     removeTodo: GraphQLRemoveTodoMutation,
     renameTodo: GraphQLRenameTodoMutation,
+    updateProductInTheCart: GraphQLUpdateProductInTheCartMutation,
   },
 });
 
