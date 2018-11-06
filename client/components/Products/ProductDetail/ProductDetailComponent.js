@@ -12,10 +12,19 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 
 import ProductPrice from './ProductPrice'
 
 class ProductDetailComponent extends React.Component {
+  state = {
+    quantity: 1,
+  };
+
+  handleChange = event => {
+    this.setState({ quantity: event.target.value });
+  };
+
   render() {
     const { open, handleClose, market } = this.props;
     return (
@@ -39,35 +48,57 @@ class ProductDetailComponent extends React.Component {
             </DialogTitle>
 
             <DialogContent>
-              <ProductPrice />
+              <ProductPrice data={market.product.price} />
 
               <Typography variant='subtitle1' paragraph>
                 {market.product.description}
               </Typography>
 
               {market.product.attributes.map(attribute => (
-                <Typography color="textSecondary" paragraph>
+                <Typography color="textSecondary">
                   {attribute}
                 </Typography>
               ))}
 
-              <Grid container xs={12} spacing={8} alignItems='center'>
-                <Grid item xs={4}>
-                  <TextField
-                    id="standard-full-width"
-                    label="Quantidade"
-                    type='number'
-                    fullWidth
-                    inputProps={{ max: 10 }}
-                  />
+              {market.product.quantity > 0 ? (
+                <Grid container xs={12} spacing={8} alignItems='center' style={{ marginTop: 8 * 4 }}>
+                  <Grid item xs={4}>
+                    <TextField
+                      id="standard-full-width"
+                      label="Quantidade"
+                      type='number'
+                      fullWidth
+                      inputProps={{ max: market.product.quantity }}
+                      defaultValue={this.state.quantity}
+                      value={this.state.quantity}
+                      onChange={::this.handleChange}
+                      error={this.state.quantity > market.product.quantity}
+                    />
+                  </Grid>
+                  <Grid item xs={8}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled={this.state.quantity > market.product.quantity}
+                      fullWidth
+                    >
+                      <ShoppingCartIcon />
+                      Adicionar ao carrinho
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={8}>
-                  <Button variant="contained" color="primary" fullWidth>
-                    <ShoppingCartIcon />
-                    Adicionar ao carrinho
-                  </Button>
+              ) : (
+                <Grid container alignItems='center' justify='center' style={{ marginTop: 8 * 4 }}>
+                  <Grid item>
+                    <Typography variant='h6' color="secondary" gutterBottom style={{ marginRight: 8 }}>
+                      Sem estoque
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <MoodBadIcon color='secondary' />
+                  </Grid>
                 </Grid>
-              </Grid>
+              )}
             </DialogContent>
           </React.Fragment>
         )}

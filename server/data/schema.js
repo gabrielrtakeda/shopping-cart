@@ -7,6 +7,7 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
+  GraphQLFloat,
 } from 'graphql';
 
 import {
@@ -259,17 +260,39 @@ const GraphQLRenameTodoMutation = mutationWithClientMutationId({
   },
 });
 
+const GraphQLPrice = new GraphQLObjectType({
+  name: 'Price',
+  fields: {
+    default: {
+      type: GraphQLFloat,
+      resolve: obj => obj.default,
+    },
+    sale: {
+      type: GraphQLFloat,
+      resolve: obj => obj.sale,
+    },
+  },
+});
+
 const GraphQLProduct = new GraphQLObjectType({
   name: 'Product',
   fields: {
     id: globalIdField('Product'),
-    name: {
-      type: GraphQLString,
-      resolve: obj => obj.name,
-    },
     categoryId: {
       type: GraphQLInt,
       resolve: obj => obj.categoryId,
+    },
+    quantity: {
+      type: GraphQLInt,
+      resolve: obj => obj.quantity,
+    },
+    price: {
+      type: GraphQLPrice,
+      resolve: obj => obj.price,
+    },
+    name: {
+      type: GraphQLString,
+      resolve: obj => obj.name,
     },
     attributes: {
       type: new GraphQLList(GraphQLString),
@@ -282,10 +305,6 @@ const GraphQLProduct = new GraphQLObjectType({
     description: {
       type: GraphQLString,
       resolve: obj => obj.description,
-    },
-    quantity: {
-      type: GraphQLInt,
-      resolve: obj => obj.quantity,
     },
   },
   interfaces: [nodeInterface],

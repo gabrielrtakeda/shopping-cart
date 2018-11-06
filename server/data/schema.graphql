@@ -96,15 +96,21 @@ type PageInfo {
   endCursor: String
 }
 
+type Price {
+  default: Float
+  sale: Float
+}
+
 type Product implements Node {
   """The ID of an object"""
   id: ID!
-  name: String
   categoryId: Int
+  quantity: Int
+  price: Price
+  name: String
   attributes: [String]
   image: String
   description: String
-  quantity: Int
 }
 
 """A connection to a list of items."""

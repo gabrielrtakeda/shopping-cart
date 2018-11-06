@@ -15,6 +15,10 @@ const query = graphql`
         image
         description
         quantity
+        price {
+          default
+          sale
+        }
       }
     }
   }
