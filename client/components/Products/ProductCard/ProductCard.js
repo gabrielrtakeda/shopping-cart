@@ -20,49 +20,69 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ProductDetail from '../ProductDetail'
 
-class RecipeReviewCard extends React.Component {
+class ProductCard extends React.Component {
+  state = {
+    openDetail: false,
+  };
+
+  handleOpen = () => {
+    this.setState({ openDetail: true });
+  };
+
+  handleClose = () => {
+    this.setState({ openDetail: false });
+  };
+
   render() {
     const { classes, data } = this.props;
 
     return (
-      <Grid item>
-        <Card className={classes.card}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={data.image}
-              title={data.name}
-            />
+      <React.Fragment>
+        <Grid item>
+          <Card>
+            <CardActionArea onClick={this.handleOpen}>
+              <CardMedia
+                className={classes.media}
+                image={data.image}
+                title={data.name}
+              />
 
-            <CardContent>
-              <Typography gutterBottom variant="subtitle1" noWrap>
-                {data.name}
-              </Typography>
-              <Typography gutterBottom>{data.categoryId}</Typography>
-              {data.attributes.map(attribute => (
-                <Typography color="textSecondary">
-                  {attribute}
+              <CardContent>
+                <Typography gutterBottom variant="subtitle1" noWrap>
+                  {data.name}
                 </Typography>
-              ))}
-            </CardContent>
-          </CardActionArea>
+                <Typography gutterBottom>{data.categoryId}</Typography>
+                {data.attributes.map(attribute => (
+                  <Typography color="textSecondary">
+                    {attribute}
+                  </Typography>
+                ))}
+              </CardContent>
+            </CardActionArea>
 
-          <CardActions className={classes.actions} disableActionSpacing>
-            <Button variant="contained" color="primary" className={classes.button} fullWidth>
-              <ShoppingCartIcon className={classes.extendedIcon} />
-              Adicionar ao carrinho
-            </Button>
-          </CardActions>
-        </Card>
-      </Grid>
+            <CardActions className={classes.actions} disableActionSpacing>
+              <Button variant="contained" color="primary" className={classes.button} fullWidth>
+                <ShoppingCartIcon />
+                Adicionar ao carrinho
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+        <ProductDetail
+          id={data.id}
+          open={this.state.openDetail}
+          handleClose={::this.handleClose}
+        />
+      </React.Fragment>
     );
   }
 }
 
 const { object, shape, string, number, arrayOf } = PropTypes;
 
-RecipeReviewCard.propTypes = {
+ProductCard.propTypes = {
   classes: object.isRequired,
   data: shape({
     id: string,
@@ -75,4 +95,4 @@ RecipeReviewCard.propTypes = {
   }).isRequired,
 };
 
-export default RecipeReviewCard;
+export default ProductCard;

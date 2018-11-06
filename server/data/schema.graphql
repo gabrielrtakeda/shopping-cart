@@ -62,6 +62,7 @@ type Market implements Node {
   id: ID!
   categories(after: String, first: Int, before: String, last: Int): CategoryConnection
   categoriesTotalCount: Int
+  product(id: ID, after: String, first: Int, before: String, last: Int): Product
   products(categoryId: String = "all", after: String, first: Int, before: String, last: Int): ProductConnection
 }
 

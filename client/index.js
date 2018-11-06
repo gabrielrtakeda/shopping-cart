@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import './services/numeral'
 import { theme } from './services/material-ui/theme'
 import AppContainer from './components/App/AppContainer'
 

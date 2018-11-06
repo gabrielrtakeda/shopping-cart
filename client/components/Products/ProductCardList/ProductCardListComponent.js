@@ -16,14 +16,14 @@ class ProductCardList extends React.Component {
       this.setState({ categoryId });
     }
 
-    this._refetch = categoryId => {
+    this.refetchProducts = categoryId => {
       this.props.relay.refetch(fragmentVariables => ({ categoryId }));
     }
 
     this.state = {
       categoryId: 'all',
       setCategoryId: this.setCategoryId,
-      refetchProducts: this._refetch,
+      refetchProducts: this.refetchProducts,
     };
   }
 
@@ -37,7 +37,7 @@ class ProductCardList extends React.Component {
           <HeroBlackFriday />
           <Grid container spacing={16}>
             {market.products && market.products.list.map(({ product }) => (
-              <Grid item key={product.id}>
+              <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
                 <ProductCard data={product} />
               </Grid>
             ))}

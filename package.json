@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "babel-node ./server/index.js",
+    "start": "yarn update-schema && yarn build && yarn server:start",
+    "server:start": "babel-node ./server/index.js",
     "build": "relay-compiler --src ./client/ --schema ./server/data/schema.graphql",
     "update-schema": "babel-node ./server/utils/updateSchema.js",
     "prettier": "find . \\( -name node_modules -o -name __generated__ \\) -prune -or \\( -name '*.js' -o -name '*.css' -o -name '*.json' -o -name '*.md' \\) -print | xargs prettier --write"
@@ -9,6 +10,7 @@
   "dependencies": {
     "@babel/core": "^7.0.1",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
@@ -23,6 +25,7 @@
     "graphql": "^14.0.2",
     "graphql-relay": "^0.5.5",
     "normalize.css": "^8.0.0",
+    "numeral": "^2.0.6",
     "prettier": "^1.14.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.0",

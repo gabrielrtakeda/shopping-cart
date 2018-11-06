@@ -1,12 +1,6 @@
 import red from '@material-ui/core/colors/red';
 
 export default theme => ({
-  card: {
-    width: `calc(100vw - ${theme.spacing.unit * 6}px)`,
-    [theme.breakpoints.up('sm')]: {
-      width: 310,
-    },
-  },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9

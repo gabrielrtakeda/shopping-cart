@@ -337,6 +337,21 @@ const GraphQLMarket = new GraphQLObjectType({
       type: GraphQLInt,
       resolve: () => getCategories().length,
     },
+    product: {
+      type: GraphQLProduct,
+      args: {
+        id: {
+          type: GraphQLID,
+        },
+        ...connectionArgs,
+      },
+      resolve: (obj, { id, ...args }) => {
+        const { type, id: rawId } = fromGlobalId(id);
+        return (
+          getProduct(rawId)
+        );
+      },
+    },
     products: {
       type: ProductsConnection,
       args: {
