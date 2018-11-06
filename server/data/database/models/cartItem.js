@@ -38,12 +38,20 @@ export const getCartItemsTotalPrice = () => {
 };
 
 export const getCartItemsQuantity = () => {
-  return getCartItems().map(item => item.quantity).reduce((acc, cur) => acc + cur);
+  const items = getCartItems();
+  if (!items.length) {
+    return 0;
+  }
+  return items.map(item => item.quantity).reduce((acc, cur) => acc + cur);
+};
+
+export const getCartItemIdByProductId = productId => {
+  const itemIds = Object.keys(itemById);
+  return itemIds.find(id => itemById[id].productId === productId);
 };
 
 export const updateProductInTheCart = (productId, quantity, append) => {
-  const itemIds = Object.keys(itemById);
-  const matchedProductId = itemIds.find(id => itemById[id].productId === productId);
+  const matchedProductId = getCartItemIdByProductId(productId);
 
   let item;
   let product;
@@ -71,6 +79,20 @@ export const updateProductInTheCart = (productId, quantity, append) => {
     }
   }
   return { item, product };
+};
+
+export const removeProductFromCart = productId => {
+  const id = getCartItemIdByProductId(productId);
+  const item = itemById[id];
+
+  const index = itemIdsByCart[CART_ID].indexOf(id);
+  if (index !== -1) {
+    itemIdsByCart[CART_ID].splice(index, 1);
+  }
+  delete itemById[id];
+
+  const product = updateProductQuantity(productId, item.quantity);
+  return { product };
 };
 
 // Mock `CartItems` data

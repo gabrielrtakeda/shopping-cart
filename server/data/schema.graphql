@@ -107,6 +107,7 @@ type Mutation {
   removeCompletedTodos(input: RemoveCompletedTodosInput!): RemoveCompletedTodosPayload
   removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
   renameTodo(input: RenameTodoInput!): RenameTodoPayload
+  removeProductFromCart(input: RemoveProductFromCartInput!): RemoveProductFromCartPayload
   updateProductInTheCart(input: UpdateProductInTheCartInput!): UpdateProductInTheCartPayload
 }
 
@@ -192,6 +193,17 @@ input RemoveCompletedTodosInput {
 type RemoveCompletedTodosPayload {
   deletedTodoIds: [String]
   viewer: User
+  clientMutationId: String
+}
+
+input RemoveProductFromCartInput {
+  productId: ID!
+  clientMutationId: String
+}
+
+type RemoveProductFromCartPayload {
+  item: CartItem
+  market: Market
   clientMutationId: String
 }
 
