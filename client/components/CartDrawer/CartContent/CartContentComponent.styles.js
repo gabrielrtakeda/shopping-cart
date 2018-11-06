@@ -10,4 +10,7 @@ export default theme => ({
     paddingBottom: theme.spacing.unit * 2,
     textAlign: 'right',
   },
+  shipping: {
+    marginBottom: theme.spacing.unit * 2,
+  },
 });

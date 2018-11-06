@@ -28,6 +28,8 @@ export default createFragmentContainer(
           }
         }
       }
+      totalItemsQuantity
+      totalItemsPrice
     }
   `
 );
