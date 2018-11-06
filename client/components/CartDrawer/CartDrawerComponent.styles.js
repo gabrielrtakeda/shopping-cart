@@ -17,4 +17,13 @@ export default theme => ({
       width: drawerWidth,
     },
   },
+  close: {
+    marginRight: 20,
+  },
+  toolbar: {
+    ...theme.mixins.toolbar,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
 });
