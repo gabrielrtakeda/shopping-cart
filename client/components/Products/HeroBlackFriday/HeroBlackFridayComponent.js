@@ -6,9 +6,10 @@ import Hero from '../../Hero'
 
 const styles = theme => ({
   root: {
-    backgroundColor: '#000000',
     color: '#fff',
-    padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 8}px`,
+    padding: `${theme.spacing.unit * 4}px 0`,
+    position: 'relative',
+    left: '10%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -17,7 +18,7 @@ const styles = theme => ({
 });
 
 const AppHeroComponent = ({ classes }) => (
-  <Hero image='https://goo.gl/C3K7g9'>
+  <Hero image='https://www.cervejariacolorado.com.br/img/site/topo-onde-encontrar.jpg'>
     <div className={classes.root}>
       <Typography variant="h3" color='inherit' >
         BlackFriday
