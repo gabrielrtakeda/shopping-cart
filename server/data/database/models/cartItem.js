@@ -46,22 +46,23 @@ export const updateProductInTheCart = (productId, quantity) => {
   const matchedProductId = itemIds.find(id => itemById[id].productId === productId);
 
   let item;
+  let product;
+
   if (matchedProductId === undefined) {
     item = addCartItem(productId, quantity);
-    updateProductQuantity(productId, quantity * -1)
+    product = updateProductQuantity(productId, quantity * -1)
   }
   else {
-    updateProductQuantity
     item = itemById[matchedProductId];
 
     // update product stock quantity
     // before update the cart item quantity of product,
     // to avoiding to lose the before cart item quantity state.
-    updateProductQuantity(productId, item.quantity - quantity);
+    product = updateProductQuantity(productId, item.quantity - quantity);
 
     item.quantity = quantity;
   }
-  return item;
+  return { item, product };
 };
 
 // Mock `CartItems` data

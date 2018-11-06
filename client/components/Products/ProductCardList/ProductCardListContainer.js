@@ -15,11 +15,12 @@ export default createRefetchContainer(
       products (
         first: 2147483647
         categoryId: $categoryId
-      ) {
+      ) @connection(key: "ProductCardListContainer_products") {
         list: edges {
           product: node {
             id
             name
+            category { name }
             categoryId
             attributes
             image

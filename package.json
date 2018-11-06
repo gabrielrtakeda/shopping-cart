@@ -41,7 +41,8 @@
   "devDependencies": {
     "@babel/node": "^7.0.0",
     "css-loader": "^1.0.1",
-    "relay-compiler": "^1.7.0"
+    "relay-compiler": "^1.7.0",
+    "relay-devtools": "^1.4.0"
   },
   "prettier": {
     "singleQuote": true,

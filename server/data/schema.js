@@ -469,6 +469,10 @@ const GraphQLMarket = new GraphQLObjectType({
         );
       },
     },
+    cart: {
+      type: GraphQLCart,
+      resolve: () => getCart(),
+    },
   },
   interfaces: [nodeInterface],
 });
@@ -484,11 +488,19 @@ const GraphQLUpdateProductInTheCartMutation = mutationWithClientMutationId({
       type: GraphQLCartItem,
       resolve: ({ itemUpdated }) => itemUpdated,
     },
+    market: {
+      type: GraphQLMarket,
+      resolve: () => getMarket(),
+    },
   },
   mutateAndGetPayload: ({ productId, quantity }) => {
     const rawProductId = fromGlobalId(productId).id;
-    const itemUpdated = updateProductInTheCart(Number(rawProductId), quantity);
-    return { itemUpdated };
+    const {
+      item: itemUpdated,
+      product: productUpdated
+    } = updateProductInTheCart(Number(rawProductId), quantity);
+
+    return { itemUpdated, productUpdated };
   },
 });
 
@@ -507,10 +519,6 @@ const Query = new GraphQLObjectType({
     market: {
       type: GraphQLMarket,
       resolve: () => getMarket(),
-    },
-    cart: {
-      type: GraphQLCart,
-      resolve: () => getCart(),
     },
     node: nodeField,
   },

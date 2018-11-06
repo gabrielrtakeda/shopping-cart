@@ -25,7 +25,7 @@ class ProductBuyAction extends React.Component {
     const quantityValidation = qty > quantity || qty < 1;
 
     return quantity > 0 ? (
-      <Grid className={containerClass} container xs={12} spacing={8} alignItems='center'>
+      <Grid className={containerClass} container spacing={8} alignItems='center'>
         <Grid item xs={4}>
           <TextField
             className={classes.textfield}
@@ -34,7 +34,6 @@ class ProductBuyAction extends React.Component {
             type='number'
             fullWidth
             inputProps={{ max: quantity, min: 1, style: { textAlign: 'center' } }}
-            defaultValue={qty}
             value={qty}
             onChange={::this.handleChange}
             error={quantityValidation}

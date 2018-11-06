@@ -97,6 +97,7 @@ type Market implements Node {
   categoriesTotalCount: Int
   product(id: ID, after: String, first: Int, before: String, last: Int): Product
   products(categoryId: String = "all", after: String, first: Int, before: String, last: Int): ProductConnection
+  cart: Cart
 }
 
 type Mutation {
@@ -176,7 +177,6 @@ type Query {
   viewer: User
   categories: CategoryConnection
   market: Market
-  cart: Cart
 
   """Fetches an object given its ID"""
   node(
@@ -250,6 +250,7 @@ input UpdateProductInTheCartInput {
 
 type UpdateProductInTheCartPayload {
   item: CartItem
+  market: Market
   clientMutationId: String
 }
 

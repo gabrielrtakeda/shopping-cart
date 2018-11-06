@@ -1,5 +1,3 @@
-import { withStyles } from '@material-ui/core/styles';
-import CartContentComponent from './CartContentComponent'
-import styles from './CartContentComponent.styles'
+import CartContentContainer from './CartContentContainer'
 
-export default withStyles(styles, { withTheme: true })(CartContentComponent);
+export default CartContentContainer;

@@ -22,7 +22,7 @@ class AppBarComponent extends React.Component {
   };
 
   render() {
-    const { classes, cart } = this.props;
+    const { classes, market } = this.props;
     const { openCartDrawer } = this.state;
 
     return (
@@ -41,7 +41,7 @@ class AppBarComponent extends React.Component {
 
             <div className={classes.shoppingCartMenu}>
               <IconButton color='inherit' onClick={this.handleCartDrawerOpen}>
-                <Badge badgeContent={cart.totalItemsQuantity} color='secondary'>
+                <Badge badgeContent={market.cart.totalItemsQuantity} color='secondary'>
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
@@ -50,6 +50,7 @@ class AppBarComponent extends React.Component {
         </AppBar>
 
         <CartDrawer
+          market={market}
           open={openCartDrawer}
           handleOpen={this.handleCartDrawerOpen}
         />
@@ -61,7 +62,7 @@ class AppBarComponent extends React.Component {
 const { object } = PropTypes;
 
 AppBarComponent.propTypes = {
-  cart: object.isRequired,
+  market: object.isRequired,
 };
 
 export default AppBarComponent;

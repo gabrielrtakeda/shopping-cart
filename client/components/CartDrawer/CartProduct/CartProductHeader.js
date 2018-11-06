@@ -4,11 +4,10 @@ import classnames from 'classnames';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-const CartProductsHeader = ({ classes }) => (
+const CartProductHeader = ({ classes }) => (
   <Grid
     className={classnames(classes.itemWrapper, classes.itemsHeader)}
     container
-    xs={12}
     spacing={16}
     alignItems='center'
   >
@@ -36,8 +35,8 @@ const CartProductsHeader = ({ classes }) => (
 
 const { object } = PropTypes;
 
-CartProductsHeader.propTypes = {
+CartProductHeader.propTypes = {
   classes: object.isRequired,
 };
 
-export default CartProductsHeader;
+export default CartProductHeader;

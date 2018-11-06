@@ -5,11 +5,11 @@ import AppBar from '../AppBar'
 import ProductCardList from '../Products/ProductCardList'
 
 const AppComponent = props => {
-  const { market, cart } = props
+  const { market } = props
 
   return (
     <React.Fragment>
-      <AppBar cart={cart} />
+      <AppBar market={market} />
       <ProductCardList market={market} />
     </React.Fragment>
   );

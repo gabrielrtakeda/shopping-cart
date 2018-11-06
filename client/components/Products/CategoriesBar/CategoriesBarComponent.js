@@ -42,7 +42,7 @@ class CategoriesBarComponent extends React.Component {
           {({ setCategoryId, categoryId, refetchProducts }) => (
             <AppBar position="static" color="default">
               <Tabs
-                classesName={classes.tabs}
+                className={classes.tabs}
                 indicatorColor="primary"
                 onChange={(e, value) => {
                   refetchProducts(value);
