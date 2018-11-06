@@ -10,6 +10,10 @@ const AppContainerQuery = graphql`
       ...CategoriesBarContainer_market
       ...ProductCardListContainer_market
     }
+    cart {
+      totalItemsQuantity
+      totalItemsPrice
+    }
   }
 `;
 

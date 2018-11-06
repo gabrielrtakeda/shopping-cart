@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -20,35 +22,26 @@ class AppBarComponent extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, cart } = this.props;
     const { openCartDrawer } = this.state;
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position='static'>
           <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Open drawer"
-            >
+            <IconButton className={classes.menuButton} color='inherit'>
               <RestaurantIcon />
             </IconButton>
 
-            <Typography
-              className={classes.title}
-              variant="h6"
-              color="inherit"
-              noWrap
-            >
-              JusMarket
+            <Typography className={classes.title} variant='h6' color='inherit' noWrap>
+              JusTbeer
             </Typography>
 
             <SearchBar />
 
             <div className={classes.shoppingCartMenu}>
-              <IconButton color="inherit" onClick={this.handleCartDrawerOpen}>
-                <Badge badgeContent={4} color="secondary">
+              <IconButton color='inherit' onClick={this.handleCartDrawerOpen}>
+                <Badge badgeContent={cart.totalItemsQuantity} color='secondary'>
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
@@ -63,6 +56,12 @@ class AppBarComponent extends React.Component {
       </div>
     );
   }
-}
+};
+
+const { object } = PropTypes;
+
+AppBarComponent.propTypes = {
+  cart: object.isRequired,
+};
 
 export default AppBarComponent;
