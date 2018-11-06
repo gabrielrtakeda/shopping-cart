@@ -14,7 +14,7 @@ export default theme => ({
       display: 'flex',
     },
   },
-  itemsHeaderQty: {
+  headerGridItem: {
     width: theme.spacing.unit * 10,
     textAlign: 'center'
   },

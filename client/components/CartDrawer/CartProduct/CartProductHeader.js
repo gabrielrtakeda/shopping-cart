@@ -16,16 +16,21 @@ const CartProductHeader = ({ classes }) => (
         Produto
       </Typography>
     </Grid>
-    <Grid item xs={12} md={3}>
+    <Grid item xs={12} md={4}>
       <Grid container spacing={16} alignItems='center' justify='space-between'>
-        <Grid item className={classes.itemsHeaderQty}>
+        <Grid item className={classes.headerGridItem}>
           <Typography>
             Qtd.
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item className={classes.headerGridItem}>
           <Typography>
             Preço
+          </Typography>
+        </Grid>
+        <Grid item className={classes.headerGridItem}>
+          <Typography>
+            Remover
           </Typography>
         </Grid>
       </Grid>

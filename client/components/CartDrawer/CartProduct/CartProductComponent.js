@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import numeral from 'numeral';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class CartProductComponent extends React.Component {
   constructor(props) {
@@ -65,7 +69,7 @@ class CartProductComponent extends React.Component {
             secondary={product.category.name}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={4}>
           <Grid container spacing={16} alignItems='center' justify='space-between'>
             <Grid item>
               <TextField
@@ -91,6 +95,11 @@ class CartProductComponent extends React.Component {
               <Typography>
                 {numeral(subtotal).format('$ 0,0.00')}
               </Typography>
+            </Grid>
+            <Grid item>
+              <IconButton>
+                <DeleteIcon />
+              </IconButton>
             </Grid>
           </Grid>
         </Grid>
