@@ -9,6 +9,37 @@ type AddTodoPayload {
   clientMutationId: String
 }
 
+type Cart implements Node {
+  """The ID of an object"""
+  id: ID!
+  items(after: String, first: Int, before: String, last: Int): CartItemConnection
+}
+
+type CartItem implements Node {
+  """The ID of an object"""
+  id: ID!
+  quantity: Int
+  product: Product
+}
+
+"""A connection to a list of items."""
+type CartItemConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CartItemEdge]
+}
+
+"""An edge in a connection."""
+type CartItemEdge {
+  """The item at the end of the edge"""
+  node: CartItem
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
 type Category implements Node {
   """The ID of an object"""
   id: ID!
@@ -105,12 +136,19 @@ type Product implements Node {
   """The ID of an object"""
   id: ID!
   categoryId: Int
+  category: ProductCategory
   quantity: Int
   price: Price
   name: String
   attributes: [String]
   image: String
   description: String
+}
+
+type ProductCategory implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
 }
 
 """A connection to a list of items."""
@@ -135,6 +173,7 @@ type Query {
   viewer: User
   categories: CategoryConnection
   market: Market
+  cart: Cart
 
   """Fetches an object given its ID"""
   node(

@@ -28,6 +28,8 @@ import {
   Market,
   Category,
   Product,
+  Cart,
+  CartItem,
 
   addTodo,
   changeTodoStatus,
@@ -42,6 +44,9 @@ import {
   getProduct,
   getProducts,
   getProductsByCategory,
+  getCart,
+  getCartItem,
+  getCartItems,
 
   markAllTodos,
   removeCompletedTodos,
@@ -59,6 +64,9 @@ const { nodeInterface, nodeField } = nodeDefinitions(
       case 'Market': return getMarket(id);
       case 'Category': return getCategory(id);
       case 'Product': return getProduct(id);
+      case 'ProductCategory': return getCategory(id);
+      case 'Cart': return getCart(id);
+      case 'CartItem': return getCartItem(id);
       default: return null;
     }
   },
@@ -69,6 +77,8 @@ const { nodeInterface, nodeField } = nodeDefinitions(
       case Market: return GraphQLMarket;
       case Category: return GraphQLCategory;
       case Product: return GraphQLProduct;
+      case Cart: return GraphQLCart;
+      case CartItem: return GraphQLCartItem;
       default: return null;
     }
   },
@@ -260,6 +270,18 @@ const GraphQLRenameTodoMutation = mutationWithClientMutationId({
   },
 });
 
+const GraphQLProductCategory = new GraphQLObjectType({
+  name: 'ProductCategory',
+  fields: {
+    id: globalIdField('ProductCategory'),
+    name: {
+      type: GraphQLString,
+      resolve: obj => obj.name,
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
 const GraphQLPrice = new GraphQLObjectType({
   name: 'Price',
   fields: {
@@ -281,6 +303,10 @@ const GraphQLProduct = new GraphQLObjectType({
     categoryId: {
       type: GraphQLInt,
       resolve: obj => obj.categoryId,
+    },
+    category: {
+      type: GraphQLProductCategory,
+      resolve: obj => getCategory(obj.categoryId),
     },
     quantity: {
       type: GraphQLInt,
@@ -341,6 +367,51 @@ const {
 } = connectionDefinitions({
   name: 'Category',
   nodeType: GraphQLCategory,
+});
+
+const GraphQLCartItem = new GraphQLObjectType({
+  name: 'CartItem',
+  fields: {
+    id: globalIdField('CartItem'),
+    quantity: {
+      type: GraphQLInt,
+      resolve: obj => obj.quantity,
+    },
+    product: {
+      type: GraphQLProduct,
+      resolve: (obj, args) => getProduct(obj.productId),
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
+const {
+  connectionType: CartItemsConnection,
+  edgeType: GraphQLCartItemEdge,
+} = connectionDefinitions({
+  name: 'CartItem',
+  nodeType: GraphQLCartItem,
+});
+
+const GraphQLCart = new GraphQLObjectType({
+  name: 'Cart',
+  fields: {
+    id: globalIdField('Cart'),
+    items: {
+      type: CartItemsConnection,
+      args: connectionArgs,
+      resolve: (obj, args) => connectionFromArray(getCartItems(), args),
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
+const {
+  connectionType: CartsConnection,
+  edgeType: GraphQLCartEdge,
+} = connectionDefinitions({
+  name: 'Cart',
+  nodeType: GraphQLCart,
 });
 
 const GraphQLMarket = new GraphQLObjectType({
@@ -406,6 +477,10 @@ const Query = new GraphQLObjectType({
     market: {
       type: GraphQLMarket,
       resolve: () => getMarket(),
+    },
+    cart: {
+      type: GraphQLCart,
+      resolve: () => getCart(),
     },
     node: nodeField,
   },
