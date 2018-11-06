@@ -12,14 +12,14 @@ const CartProductsHeader = ({ classes }) => (
     spacing={16}
     alignItems='center'
   >
-    <Grid item style={{ flex: 1 }}>
+    <Grid item className={classes.grow}>
       <Typography>
         Produto
       </Typography>
     </Grid>
     <Grid item xs={12} md={3}>
       <Grid container spacing={16} alignItems='center' justify='space-between'>
-        <Grid item style={{ width: 8 * 10, textAlign: 'center' }}>
+        <Grid item className={classes.itemsHeaderQty}>
           <Typography>
             Qtd.
           </Typography>

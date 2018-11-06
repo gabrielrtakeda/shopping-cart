@@ -33,7 +33,7 @@ class ProductBuyAction extends React.Component {
             label='Quantidade'
             type='number'
             fullWidth
-            inputProps={{ max: quantity, min: 1 }}
+            inputProps={{ max: quantity, min: 1, style: { textAlign: 'center' } }}
             defaultValue={qty}
             value={qty}
             onChange={::this.handleChange}

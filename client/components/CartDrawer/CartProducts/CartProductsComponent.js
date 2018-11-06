@@ -15,27 +15,26 @@ const CartProductsComponent = ({ classes }) => (
         className={classes.avatar}
       />
     </Grid>
-    <Grid item style={{ flex: 1 }}>
+    <Grid item className={classes.grow}>
       <ListItemText
-        primary="Brouwerij De Sint-Sixtusabdij van Westvleteren Westvleteren 12 (XII)"
+        primary='Brouwerij De Sint-Sixtusabdij van Westvleteren Westvleteren 12 (XII)'
         secondary='Westvleteren, Belgium'
       />
     </Grid>
     <Grid item xs={12} md={3}>
       <Grid container spacing={16} alignItems='center' justify='space-between'>
-        <Grid item style={{ textAlign: 'center' }}>
+        <Grid item>
           <TextField
-            defaultValue="foo"
-            style={{ margin: 0, width: 8 * 10 }}
-            margin="dense"
-            type='number'
-            defaultValue={1}
+            className={classes.textfield}
             inputProps={{
               min: 1,
               style: { textAlign: 'center' }
             }}
+            margin='dense'
+            type='number'
+            defaultValue={1}
           />
-          <div style={{ marginTop: 8 }}>
+          <div className={classes.deleteButton}>
             <Button size='small'>
               remover
             </Button>

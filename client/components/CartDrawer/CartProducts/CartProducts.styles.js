@@ -14,9 +14,23 @@ export default theme => ({
       display: 'flex',
     },
   },
+  itemsHeaderQty: {
+    width: theme.spacing.unit * 10,
+    textAlign: 'center'
+  },
   avatar: {
     width: theme.spacing.unit * 10,
     height: theme.spacing.unit * 10,
     borderRadius: theme.spacing.unit / 2,
+  },
+  textfield: {
+    margin: 0,
+    width: theme.spacing.unit * 10,
+  },
+  deleteButton: {
+    marginTop: theme.spacing.unit * 1,
+  },
+  grow: {
+    flex: 1,
   },
 });
