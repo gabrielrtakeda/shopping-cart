@@ -35,7 +35,7 @@ class CartDrawerComponent extends React.Component {
               </IconButton>
             </div>
             <Divider />
-            <CartContent handleOpen={handleOpen} cart={market.cart} />
+            {!open ? null : <CartContent handleOpen={handleOpen} cart={market.cart} />}
           </Drawer>
         </div>
       </div>

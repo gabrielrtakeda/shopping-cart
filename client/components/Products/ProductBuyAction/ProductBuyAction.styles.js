@@ -15,4 +15,7 @@ export default theme => ({
   textfield: {
     marginBottom: theme.spacing.unit * 1,
   },
+  shoppingCartIcon: {
+    marginRight: theme.spacing.unit * 1,
+  },
 });

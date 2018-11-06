@@ -482,6 +482,7 @@ const GraphQLUpdateProductInTheCartMutation = mutationWithClientMutationId({
   inputFields: {
     productId: { type: new GraphQLNonNull(GraphQLID) },
     quantity: { type: new GraphQLNonNull(GraphQLInt) },
+    append: { type: GraphQLBoolean, defaultValue: false },
   },
   outputFields: {
     item: {
@@ -493,12 +494,12 @@ const GraphQLUpdateProductInTheCartMutation = mutationWithClientMutationId({
       resolve: () => getMarket(),
     },
   },
-  mutateAndGetPayload: ({ productId, quantity }) => {
+  mutateAndGetPayload: ({ productId, quantity, append }) => {
     const rawProductId = fromGlobalId(productId).id;
     const {
       item: itemUpdated,
       product: productUpdated
-    } = updateProductInTheCart(Number(rawProductId), quantity);
+    } = updateProductInTheCart(Number(rawProductId), quantity, append);
 
     return { itemUpdated, productUpdated };
   },

@@ -245,6 +245,7 @@ type TodoEdge {
 input UpdateProductInTheCartInput {
   productId: ID!
   quantity: Int!
+  append: Boolean = false
   clientMutationId: String
 }
 

@@ -3,16 +3,10 @@ import { commitMutation, graphql } from 'react-relay';
 const mutation = graphql`
   mutation UpdateProductInTheCartMutation($input: UpdateProductInTheCartInput!) {
     updateProductInTheCart(input: $input) {
-      item {
-        id
-        quantity
-      }
       market {
         ...ProductCardListContainer_market
 
         cart {
-          totalItemsQuantity
-          totalItemsPrice
           ...CartContentContainer_cart
         }
       }
@@ -20,11 +14,11 @@ const mutation = graphql`
   }
 `;
 
-function commit(environment, onCompleted, productId, quantity) {
+function commit(environment, onCompleted, productId, quantity, append) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      input: { productId, quantity },
+      input: { productId, quantity, append },
     },
     onCompleted,
   });

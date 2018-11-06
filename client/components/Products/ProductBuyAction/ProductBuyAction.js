@@ -9,14 +9,23 @@ import Typography from '@material-ui/core/Typography';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
+import environment from '../../../services/relay/environment';
+import mutation from '../../../mutations/UpdateProductInTheCartMutation';
+
 class ProductBuyAction extends React.Component {
   state = {
     qty: 1,
   };
 
-  handleChange = event => {
-    this.setState({ qty: event.target.value });
-  };
+  handleChange = event => this.setState({ qty: Number(event.target.value) });
+  handleClick = event => mutation.commit(
+    environment,
+    ::this.resetQty,
+    this.props.data.id,
+    this.state.qty,
+    true
+  );
+  resetQty = () => this.setState({ qty: 1 });
 
   render() {
     const { classes, data: { quantity }, noMargin } = this.props;
@@ -45,8 +54,9 @@ class ProductBuyAction extends React.Component {
             color='primary'
             disabled={quantityValidation}
             fullWidth
+            onClick={this.handleClick}
           >
-            <ShoppingCartIcon />
+            <ShoppingCartIcon className={classes.shoppingCartIcon} />
             Adicionar ao carrinho
           </Button>
         </Grid>
@@ -59,7 +69,7 @@ class ProductBuyAction extends React.Component {
             variant='h6'
             color='secondary'
           >
-            Sem estoque
+            Produto esgotado
           </Typography>
         </Grid>
         <Grid item>

@@ -40,7 +40,7 @@ class AppBarComponent extends React.Component {
             <SearchBar />
 
             <div className={classes.shoppingCartMenu}>
-              <IconButton color='inherit' onClick={this.handleCartDrawerOpen}>
+              <IconButton color='inherit' onClick={() => this.handleCartDrawerOpen(true)}>
                 <Badge badgeContent={market.cart.totalItemsQuantity} color='secondary'>
                   <ShoppingCartIcon />
                 </Badge>
@@ -52,7 +52,7 @@ class AppBarComponent extends React.Component {
         <CartDrawer
           market={market}
           open={openCartDrawer}
-          handleOpen={this.handleCartDrawerOpen}
+          handleOpen={::this.handleCartDrawerOpen}
         />
       </div>
     );

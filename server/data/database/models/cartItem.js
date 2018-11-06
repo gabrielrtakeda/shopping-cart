@@ -41,7 +41,7 @@ export const getCartItemsQuantity = () => {
   return getCartItems().map(item => item.quantity).reduce((acc, cur) => acc + cur);
 };
 
-export const updateProductInTheCart = (productId, quantity) => {
+export const updateProductInTheCart = (productId, quantity, append) => {
   const itemIds = Object.keys(itemById);
   const matchedProductId = itemIds.find(id => itemById[id].productId === productId);
 
@@ -55,12 +55,20 @@ export const updateProductInTheCart = (productId, quantity) => {
   else {
     item = itemById[matchedProductId];
 
-    // update product stock quantity
-    // before update the cart item quantity of product,
-    // to avoiding to lose the before cart item quantity state.
-    product = updateProductQuantity(productId, item.quantity - quantity);
-
-    item.quantity = quantity;
+    if (append) {
+      // sum received quantity with current
+      // cart item quantity, instead of adding
+      // product diff quantity.
+      product = updateProductQuantity(productId, quantity * -1);
+      item.quantity = item.quantity + quantity;
+    }
+    else {
+      // update product stock quantity
+      // before update the cart item quantity of product,
+      // to avoiding to lose the before cart item quantity state.
+      product = updateProductQuantity(productId, item.quantity - quantity);
+      item.quantity = quantity;
+    }
   }
   return { item, product };
 };
