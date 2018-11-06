@@ -21,6 +21,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ProductDetail from '../ProductDetail'
+import ProductBuyAction from '../ProductBuyAction'
 
 class ProductCard extends React.Component {
   state = {
@@ -62,11 +63,8 @@ class ProductCard extends React.Component {
               </CardContent>
             </CardActionArea>
 
-            <CardActions className={classes.actions} disableActionSpacing>
-              <Button variant="contained" color="primary" className={classes.button} fullWidth>
-                <ShoppingCartIcon />
-                Adicionar ao carrinho
-              </Button>
+            <CardActions className={classes.actions}>
+              <ProductBuyAction data={data} noMargin />
             </CardActions>
           </Card>
         </Grid>

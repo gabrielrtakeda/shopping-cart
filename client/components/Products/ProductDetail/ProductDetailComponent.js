@@ -15,15 +15,9 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 
 import ProductPrice from './ProductPrice'
+import ProductBuyAction from '../ProductBuyAction'
 
 class ProductDetailComponent extends React.Component {
-  state = {
-    quantity: 1,
-  };
-
-  handleChange = event => {
-    this.setState({ quantity: event.target.value });
-  };
 
   render() {
     const { open, handleClose, market } = this.props;
@@ -60,45 +54,7 @@ class ProductDetailComponent extends React.Component {
                 </Typography>
               ))}
 
-              {market.product.quantity > 0 ? (
-                <Grid container xs={12} spacing={8} alignItems='center' style={{ marginTop: 8 * 4 }}>
-                  <Grid item xs={4}>
-                    <TextField
-                      id="standard-full-width"
-                      label="Quantidade"
-                      type='number'
-                      fullWidth
-                      inputProps={{ max: market.product.quantity }}
-                      defaultValue={this.state.quantity}
-                      value={this.state.quantity}
-                      onChange={::this.handleChange}
-                      error={this.state.quantity > market.product.quantity}
-                    />
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disabled={this.state.quantity > market.product.quantity}
-                      fullWidth
-                    >
-                      <ShoppingCartIcon />
-                      Adicionar ao carrinho
-                    </Button>
-                  </Grid>
-                </Grid>
-              ) : (
-                <Grid container alignItems='center' justify='center' style={{ marginTop: 8 * 4 }}>
-                  <Grid item>
-                    <Typography variant='h6' color="secondary" gutterBottom style={{ marginRight: 8 }}>
-                      Sem estoque
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <MoodBadIcon color='secondary' />
-                  </Grid>
-                </Grid>
-              )}
+              <ProductBuyAction data={market.product} />
             </DialogContent>
           </React.Fragment>
         )}
