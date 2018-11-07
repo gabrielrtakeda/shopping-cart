@@ -1,5 +1,6 @@
 {
   "private": true,
+  "version": "1.0.0",
   "scripts": {
     "start": "yarn update-schema && yarn build && yarn server:start",
     "server:start": "babel-node ./server/index.js",
