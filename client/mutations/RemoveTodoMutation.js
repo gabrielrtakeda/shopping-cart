@@ -1,5 +1,5 @@
-import {commitMutation, graphql} from 'react-relay';
-import {ConnectionHandler} from 'relay-runtime';
+import { commitMutation, graphql } from 'react-relay'
+import { ConnectionHandler } from 'relay-runtime'
 
 const mutation = graphql`
   mutation RemoveTodoMutation($input: RemoveTodoInput!) {
@@ -11,28 +11,28 @@ const mutation = graphql`
       }
     }
   }
-`;
+`
 
-function sharedUpdater(store, user, deletedID) {
-  const userProxy = store.get(user.id);
-  const conn = ConnectionHandler.getConnection(userProxy, 'TodoList_todos');
-  ConnectionHandler.deleteNode(conn, deletedID);
+function sharedUpdater (store, user, deletedID) {
+  const userProxy = store.get(user.id)
+  const conn = ConnectionHandler.getConnection(userProxy, 'TodoList_todos')
+  ConnectionHandler.deleteNode(conn, deletedID)
 }
 
-function commit(environment, todo, user) {
+function commit (environment, todo, user) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      input: {id: todo.id},
+      input: { id: todo.id }
     },
     updater: store => {
-      const payload = store.getRootField('removeTodo');
-      sharedUpdater(store, user, payload.getValue('deletedTodoId'));
+      const payload = store.getRootField('removeTodo')
+      sharedUpdater(store, user, payload.getValue('deletedTodoId'))
     },
     optimisticUpdater: store => {
-      sharedUpdater(store, user, todo.id);
-    },
-  });
+      sharedUpdater(store, user, todo.id)
+    }
+  })
 }
 
-export default {commit};
+export default { commit }

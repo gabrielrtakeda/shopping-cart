@@ -7,6 +7,6 @@ export default theme => ({
     borderRadius: theme.spacing.unit / 2,
     marginBottom: theme.spacing.unit * 2,
     display: 'flex',
-    overflow: 'hidden',
-  },
+    overflow: 'hidden'
+  }
 })

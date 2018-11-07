@@ -1,31 +1,31 @@
-import AddTodoMutation from '../mutations/AddTodoMutation';
-import TodoList from './TodoList';
-import TodoListFooter from './TodoListFooter';
-import TodoTextInput from './TodoTextInput';
+import AddTodoMutation from '../mutations/AddTodoMutation'
+import TodoList from './TodoList'
+import TodoListFooter from './TodoListFooter'
+import TodoTextInput from './TodoTextInput'
 
-import React from 'react';
-import {createFragmentContainer, graphql} from 'react-relay';
+import React from 'react'
+import { createFragmentContainer, graphql } from 'react-relay'
 
 class TodoApp extends React.Component {
   _handleTextInputSave = text => {
     AddTodoMutation.commit(
       this.props.relay.environment,
       text,
-      this.props.viewer,
-    );
+      this.props.viewer
+    )
   };
-  render() {
-    const hasTodos = this.props.viewer.totalCount > 0;
+  render () {
+    const hasTodos = this.props.viewer.totalCount > 0
     return (
       <div>
-        <section className="todoapp">
-          <header className="header">
+        <section className='todoapp'>
+          <header className='header'>
             <h1>todos</h1>
             <TodoTextInput
-              autoFocus={true}
-              className="new-todo"
+              autoFocus
+              className='new-todo'
               onSave={this._handleTextInputSave}
-              placeholder="What needs to be done?"
+              placeholder='What needs to be done?'
             />
           </header>
           <TodoList viewer={this.props.viewer} />
@@ -36,18 +36,18 @@ class TodoApp extends React.Component {
             />
           )}
         </section>
-        <footer className="info">
+        <footer className='info'>
           <p>Double-click to edit a todo</p>
           <p>
             Created by the{' '}
-            <a href="https://facebook.github.io/relay/">Relay team</a>
+            <a href='https://facebook.github.io/relay/'>Relay team</a>
           </p>
           <p>
-            Part of <a href="http://todomvc.com">TodoMVC</a>
+            Part of <a href='http://todomvc.com'>TodoMVC</a>
           </p>
         </footer>
       </div>
-    );
+    )
   }
 }
 
@@ -59,5 +59,5 @@ export default createFragmentContainer(TodoApp, {
       ...TodoListFooter_viewer
       ...TodoList_viewer
     }
-  `,
-});
+  `
+})

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 
 class Layout extends React.Component {
-  render() {
+  render () {
     const { classes, children } = this.props
 
     return (
@@ -17,7 +17,7 @@ class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default Layout

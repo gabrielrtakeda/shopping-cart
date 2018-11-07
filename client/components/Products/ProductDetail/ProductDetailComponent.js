@@ -1,33 +1,32 @@
-import React from 'react';
-import numeral from 'numeral';
-import md5 from 'md5';
+import React from 'react'
+import numeral from 'numeral'
+import md5 from 'md5'
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import MoodBadIcon from '@material-ui/icons/MoodBad';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import MoodBadIcon from '@material-ui/icons/MoodBad'
 
-import ProductPrice from './ProductPrice';
-import ProductBuyAction from '../ProductBuyAction';
+import ProductPrice from './ProductPrice'
+import ProductBuyAction from '../ProductBuyAction'
 
 class ProductDetailComponent extends React.Component {
-
-  render() {
-    const { open, handleClose, market } = this.props;
+  render () {
+    const { open, handleClose, market } = this.props
     return (
       <Dialog
         open={open}
         onClose={handleClose}
         scroll='body'
-        aria-labelledby="scroll-dialog-title"
+        aria-labelledby='scroll-dialog-title'
       >
         {!market ? 'Loading...' : (
           <React.Fragment>
@@ -36,9 +35,9 @@ class ProductDetailComponent extends React.Component {
               paddingTop: '56.25%',
               backgroundImage: `url(${market.product.image})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center center',
+              backgroundPosition: 'center center'
             }} />
-            <DialogTitle id="scroll-dialog-title">
+            <DialogTitle id='scroll-dialog-title'>
               {market.product.name}
             </DialogTitle>
 
@@ -50,7 +49,7 @@ class ProductDetailComponent extends React.Component {
               </Typography>
 
               {market.product.attributes.map(attribute => (
-                <Typography key={`${market.product.id}${md5(attribute)}`} color="textSecondary">
+                <Typography key={`${market.product.id}${md5(attribute)}`} color='textSecondary'>
                   {attribute}
                 </Typography>
               ))}
@@ -60,8 +59,8 @@ class ProductDetailComponent extends React.Component {
           </React.Fragment>
         )}
       </Dialog>
-    );
+    )
   }
 }
 
-export default ProductDetailComponent;
+export default ProductDetailComponent

@@ -1,18 +1,18 @@
 export default theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   menuButton: {
-    marginRight: 20,
+    marginRight: 20
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
+      display: 'block'
     },
-    marginRight: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3
   },
   shoppingCartMenu: {
-    marginLeft: theme.spacing.unit * 3,
-  },
-});
+    marginLeft: theme.spacing.unit * 3
+  }
+})

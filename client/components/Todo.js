@@ -1,90 +1,90 @@
-import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation';
-import RemoveTodoMutation from '../mutations/RemoveTodoMutation';
-import RenameTodoMutation from '../mutations/RenameTodoMutation';
-import TodoTextInput from './TodoTextInput';
+import ChangeTodoStatusMutation from '../mutations/ChangeTodoStatusMutation'
+import RemoveTodoMutation from '../mutations/RemoveTodoMutation'
+import RenameTodoMutation from '../mutations/RenameTodoMutation'
+import TodoTextInput from './TodoTextInput'
 
-import React from 'react';
-import {createFragmentContainer, graphql} from 'react-relay';
-import classnames from 'classnames';
+import React from 'react'
+import { createFragmentContainer, graphql } from 'react-relay'
+import classnames from 'classnames'
 
 class Todo extends React.Component {
   state = {
-    isEditing: false,
+    isEditing: false
   };
   _handleCompleteChange = e => {
-    const complete = e.target.checked;
+    const complete = e.target.checked
     ChangeTodoStatusMutation.commit(
       this.props.relay.environment,
       complete,
       this.props.todo,
-      this.props.viewer,
-    );
+      this.props.viewer
+    )
   };
   _handleDestroyClick = () => {
-    this._removeTodo();
+    this._removeTodo()
   };
   _handleLabelDoubleClick = () => {
-    this._setEditMode(true);
+    this._setEditMode(true)
   };
   _handleTextInputCancel = () => {
-    this._setEditMode(false);
+    this._setEditMode(false)
   };
   _handleTextInputDelete = () => {
-    this._setEditMode(false);
-    this._removeTodo();
+    this._setEditMode(false)
+    this._removeTodo()
   };
   _handleTextInputSave = text => {
-    this._setEditMode(false);
+    this._setEditMode(false)
     RenameTodoMutation.commit(
       this.props.relay.environment,
       text,
-      this.props.todo,
-    );
+      this.props.todo
+    )
   };
-  _removeTodo() {
+  _removeTodo () {
     RemoveTodoMutation.commit(
       this.props.relay.environment,
       this.props.todo,
-      this.props.viewer,
-    );
+      this.props.viewer
+    )
   }
   _setEditMode = shouldEdit => {
-    this.setState({isEditing: shouldEdit});
+    this.setState({ isEditing: shouldEdit })
   };
-  renderTextInput() {
+  renderTextInput () {
     return (
       <TodoTextInput
-        className="edit"
-        commitOnBlur={true}
+        className='edit'
+        commitOnBlur
         initialValue={this.props.todo.text}
         onCancel={this._handleTextInputCancel}
         onDelete={this._handleTextInputDelete}
         onSave={this._handleTextInputSave}
       />
-    );
+    )
   }
-  render() {
+  render () {
     return (
       <li
         className={classnames({
           completed: this.props.todo.complete,
-          editing: this.state.isEditing,
+          editing: this.state.isEditing
         })}>
-        <div className="view">
+        <div className='view'>
           <input
             checked={this.props.todo.complete}
-            className="toggle"
+            className='toggle'
             onChange={this._handleCompleteChange}
-            type="checkbox"
+            type='checkbox'
           />
           <label onDoubleClick={this._handleLabelDoubleClick}>
             {this.props.todo.text}
           </label>
-          <button className="destroy" onClick={this._handleDestroyClick} />
+          <button className='destroy' onClick={this._handleDestroyClick} />
         </div>
         {this.state.isEditing && this.renderTextInput()}
       </li>
-    );
+    )
   }
 }
 
@@ -102,5 +102,5 @@ export default createFragmentContainer(Todo, {
       totalCount
       completedCount
     }
-  `,
-});
+  `
+})

@@ -1,8 +1,8 @@
 import {
   createFragmentContainer,
-  graphql,
-} from 'react-relay';
-import CategoriesBarComponent from './CategoriesBarComponent';
+  graphql
+} from 'react-relay'
+import CategoriesBarComponent from './CategoriesBarComponent'
 
 export default createFragmentContainer(CategoriesBarComponent, {
   market: graphql`
@@ -17,4 +17,4 @@ export default createFragmentContainer(CategoriesBarComponent, {
       }
     }
   `
-});
+})

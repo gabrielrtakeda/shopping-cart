@@ -2,17 +2,17 @@ export default theme => ({
   itemWrapper: {
     marginBottom: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    borderBottom: '1px solid #efefef',
+    borderBottom: '1px solid #efefef'
   },
   noBorder: {
-    border: 'none',
+    border: 'none'
   },
   itemsHeader: {
     display: 'none',
     paddingBottom: 0,
     [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
+      display: 'flex'
+    }
   },
   headerGridItem: {
     width: theme.spacing.unit * 10,
@@ -21,16 +21,16 @@ export default theme => ({
   avatar: {
     width: theme.spacing.unit * 10,
     height: theme.spacing.unit * 10,
-    borderRadius: theme.spacing.unit / 2,
+    borderRadius: theme.spacing.unit / 2
   },
   textfield: {
     margin: 0,
-    width: theme.spacing.unit * 10,
+    width: theme.spacing.unit * 10
   },
   deleteButton: {
-    marginTop: theme.spacing.unit * 1,
+    marginTop: theme.spacing.unit * 1
   },
   grow: {
-    flex: 1,
-  },
-});
+    flex: 1
+  }
+})

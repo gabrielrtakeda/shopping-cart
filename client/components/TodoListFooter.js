@@ -1,39 +1,39 @@
-import RemoveCompletedTodosMutation from '../mutations/RemoveCompletedTodosMutation';
+import RemoveCompletedTodosMutation from '../mutations/RemoveCompletedTodosMutation'
 
-import React from 'react';
-import {graphql, createFragmentContainer} from 'react-relay';
+import React from 'react'
+import { graphql, createFragmentContainer } from 'react-relay'
 
 class TodoListFooter extends React.Component {
   _handleRemoveCompletedTodosClick = () => {
     const edges = this.props.viewer.todos.edges.filter(
-      edge => edge.node.complete === true,
-    );
+      edge => edge.node.complete === true
+    )
     RemoveCompletedTodosMutation.commit(
       this.props.relay.environment,
       {
-        edges,
+        edges
       },
-      this.props.viewer,
-    );
+      this.props.viewer
+    )
   };
-  render() {
-    const numCompletedTodos = this.props.viewer.completedCount;
-    const numRemainingTodos = this.props.viewer.totalCount - numCompletedTodos;
+  render () {
+    const numCompletedTodos = this.props.viewer.completedCount
+    const numRemainingTodos = this.props.viewer.totalCount - numCompletedTodos
     return (
-      <footer className="footer">
-        <span className="todo-count">
+      <footer className='footer'>
+        <span className='todo-count'>
           <strong>{numRemainingTodos}</strong> item
           {numRemainingTodos === 1 ? '' : 's'} left
         </span>
         {numCompletedTodos > 0 && (
           <button
-            className="clear-completed"
+            className='clear-completed'
             onClick={this._handleRemoveCompletedTodosClick}>
             Clear completed
           </button>
         )}
       </footer>
-    );
+    )
   }
 }
 
@@ -55,5 +55,5 @@ export default createFragmentContainer(
       }
       totalCount
     }
-  `,
-);
+  `
+)

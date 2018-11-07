@@ -1,7 +1,7 @@
-import 'normalize.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import 'normalize.css'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 
 import './services/numeral'
 import { theme } from './services/material-ui/theme'
@@ -15,5 +15,5 @@ const Root = () => (
 
 ReactDOM.render(
   <Root />,
-  document.getElementById('root'),
-);
+  document.getElementById('root')
+)

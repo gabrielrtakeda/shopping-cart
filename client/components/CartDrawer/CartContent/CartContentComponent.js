@@ -1,25 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
+import React from 'react'
+import PropTypes from 'prop-types'
+import numeral from 'numeral'
 
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 import UpdateProductInTheCartMutation from '../../../mutations/UpdateProductInTheCartMutation'
-import RemoveProductFromCartMutation from '../../../mutations/RemoveProductFromCartMutation';
+import RemoveProductFromCartMutation from '../../../mutations/RemoveProductFromCartMutation'
 import CartProduct from '../CartProduct'
 import styles from './CartContentComponent.styles'
 
 const containerProps = {
   container: true,
   spacing: 16,
-  justify: 'space-between',
-};
+  justify: 'space-between'
+}
 
 export const CartContentComponent = ({ classes, handleOpen, cart, relay }) => {
-  const { environment } = relay;
-  const subtotal = numeral(cart.totalItemsPrice).format('$ 0,0.00');
+  const { environment } = relay
+  const subtotal = numeral(cart.totalItemsPrice).format('$ 0,0.00')
 
   return (
     <Grid item className={classes.summary} xs={12}>
@@ -32,10 +32,10 @@ export const CartContentComponent = ({ classes, handleOpen, cart, relay }) => {
           key={item.id}
           data={item}
           updateProductInTheCartMutation={(...args) => {
-            UpdateProductInTheCartMutation.commit(environment, ...args);
+            UpdateProductInTheCartMutation.commit(environment, ...args)
           }}
           removeProductFromCartMutation={(...args) => {
-            RemoveProductFromCartMutation.commit(environment, ...args);
+            RemoveProductFromCartMutation.commit(environment, ...args)
           }}
         />
       ))}
@@ -60,19 +60,19 @@ export const CartContentComponent = ({ classes, handleOpen, cart, relay }) => {
         </Grid>
       </Grid>
     </Grid>
-  );
+  )
 }
 
-const { object, func, bool, shape, number } = PropTypes;
+const { object, func, bool, shape, number } = PropTypes
 
 CartContentComponent.propTypes = {
   classes: object.isRequired,
   handleOpen: func.isRequired,
   cart: shape({
     totalItemsQuantity: number,
-    totalItemsPrice: number,
+    totalItemsPrice: number
   }).isRequired,
-  relay: object.isRequired,
-};
+  relay: object.isRequired
+}
 
-export default withStyles(styles, { withTheme: true })(CartContentComponent);
+export default withStyles(styles, { withTheme: true })(CartContentComponent)

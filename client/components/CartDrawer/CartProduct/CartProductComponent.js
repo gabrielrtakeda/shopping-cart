@@ -1,27 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
+import React from 'react'
+import PropTypes from 'prop-types'
+import numeral from 'numeral'
 
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemText from '@material-ui/core/ListItemText';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
+import ListItemText from '@material-ui/core/ListItemText'
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/Delete'
 
 class CartProductComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    const { data: { product, quantity } } = props;
-    const productPrice = product.price.sale || product.price.default;
+  constructor (props) {
+    super(props)
+    const { data: { product, quantity } } = props
+    const productPrice = product.price.sale || product.price.default
 
     this.state = {
       qty: quantity,
-      subtotal: productPrice * quantity,
-    };
+      subtotal: productPrice * quantity
+    }
   }
 
   handleChange = event => this.setState({ qty: Number(event.target.value) });
@@ -31,36 +31,36 @@ class CartProductComponent extends React.Component {
       this.props.updateProductInTheCartMutation(
         ::this.updatePriceSubtotal,
         this.props.data.product.id,
-        this.state.qty,
-      );
+        this.state.qty
+      )
     }
   };
 
   handleClickDeleteButton = event => {
     this.props.removeProductFromCartMutation(
       f => { console.log('removeProductFromCartMutation:onComplete') },
-      this.props.data.product.id,
-    );
+      this.props.data.product.id
+    )
   };
 
   updatePriceSubtotal = (response) => {
     const { qty } = this.state
-    const { data: { product } } = this.props;
-    const subtotal = (product.price.sale || product.price.default) * qty;
+    const { data: { product } } = this.props
+    const subtotal = (product.price.sale || product.price.default) * qty
 
     this.setState({ subtotal })
   };
 
   validateQuantity = qty => {
-    const { data: { product, quantity } } = this.props;
-    const total = product.quantity + quantity;
+    const { data: { product, quantity } } = this.props
+    const total = product.quantity + quantity
 
-    return qty <= total && qty > 0;
+    return qty <= total && qty > 0
   };
 
-  render() {
-    const { classes, data: { product, quantity } } = this.props;
-    const { qty, subtotal } = this.state;
+  render () {
+    const { classes, data: { product, quantity } } = this.props
+    const { qty, subtotal } = this.state
 
     return (
       <Grid className={classes.itemWrapper} container spacing={16} alignItems='center'>
@@ -84,7 +84,7 @@ class CartProductComponent extends React.Component {
                 inputProps={{
                   min: 1,
                   max: product.quantity + quantity,
-                  style: { textAlign: 'center' },
+                  style: { textAlign: 'center' }
                 }}
                 onChange={this.handleChange}
                 error={!this.validateQuantity(qty)}
@@ -111,11 +111,11 @@ class CartProductComponent extends React.Component {
           </Grid>
         </Grid>
       </Grid>
-    );
+    )
   }
 };
 
-const { object, number, shape, string, func } = PropTypes;
+const { object, number, shape, string, func } = PropTypes
 
 CartProductComponent.propTypes = {
   classes: object.isRequired,
@@ -127,10 +127,10 @@ CartProductComponent.propTypes = {
       quantity: number,
       price: shape({ default: number, sale: number }),
       name: string,
-      image: string,
-    }),
+      image: string
+    })
   }).isRequired,
-  updateProductInTheCartMutation: func.isRequired,
-};
+  updateProductInTheCartMutation: func.isRequired
+}
 
 export default CartProductComponent

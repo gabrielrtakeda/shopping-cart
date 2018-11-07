@@ -1,8 +1,8 @@
 import {
   createFragmentContainer,
-  graphql,
-} from 'react-relay';
-import CartContentComponent from './CartContentComponent';
+  graphql
+} from 'react-relay'
+import CartContentComponent from './CartContentComponent'
 
 export default createFragmentContainer(
   CartContentComponent,
@@ -32,4 +32,4 @@ export default createFragmentContainer(
       totalItemsPrice
     }
   `
-);
+)

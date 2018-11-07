@@ -1,4 +1,4 @@
-import { commitMutation, graphql } from 'react-relay';
+import { commitMutation, graphql } from 'react-relay'
 
 const mutation = graphql`
   mutation UpdateProductInTheCartMutation($input: UpdateProductInTheCartInput!) {
@@ -12,16 +12,16 @@ const mutation = graphql`
       }
     }
   }
-`;
+`
 
-function commit(environment, onCompleted, productId, quantity, append) {
+function commit (environment, onCompleted, productId, quantity, append) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      input: { productId, quantity, append },
+      input: { productId, quantity, append }
     },
-    onCompleted,
-  });
+    onCompleted
+  })
 };
 
-export default { commit };
+export default { commit }

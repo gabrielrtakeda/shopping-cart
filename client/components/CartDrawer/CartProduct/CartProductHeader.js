@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 const CartProductHeader = ({ classes }) => (
   <Grid
@@ -36,12 +36,12 @@ const CartProductHeader = ({ classes }) => (
       </Grid>
     </Grid>
   </Grid>
-);
+)
 
-const { object } = PropTypes;
+const { object } = PropTypes
 
 CartProductHeader.propTypes = {
-  classes: object.isRequired,
-};
+  classes: object.isRequired
+}
 
-export default CartProductHeader;
+export default CartProductHeader

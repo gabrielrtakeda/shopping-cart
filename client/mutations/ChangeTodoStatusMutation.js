@@ -1,4 +1,4 @@
-import {commitMutation, graphql} from 'react-relay';
+import { commitMutation, graphql } from 'react-relay'
 
 const mutation = graphql`
   mutation ChangeTodoStatusMutation($input: ChangeTodoStatusInput!) {
@@ -13,34 +13,34 @@ const mutation = graphql`
       }
     }
   }
-`;
+`
 
-function getOptimisticResponse(complete, todo, user) {
-  const viewerPayload = {id: user.id};
+function getOptimisticResponse (complete, todo, user) {
+  const viewerPayload = { id: user.id }
   if (user.completedCount != null) {
     viewerPayload.completedCount = complete
       ? user.completedCount + 1
-      : user.completedCount - 1;
+      : user.completedCount - 1
   }
   return {
     changeTodoStatus: {
       todo: {
         complete: complete,
-        id: todo.id,
+        id: todo.id
       },
-      viewer: viewerPayload,
-    },
-  };
+      viewer: viewerPayload
+    }
+  }
 }
 
-function commit(environment, complete, todo, user) {
+function commit (environment, complete, todo, user) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      input: {complete, id: todo.id},
+      input: { complete, id: todo.id }
     },
-    optimisticResponse: getOptimisticResponse(complete, todo, user),
-  });
+    optimisticResponse: getOptimisticResponse(complete, todo, user)
+  })
 }
 
-export default {commit};
+export default { commit }

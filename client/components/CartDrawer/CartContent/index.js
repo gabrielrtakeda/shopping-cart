@@ -1,3 +1,3 @@
 import CartContentContainer from './CartContentContainer'
 
-export default CartContentContainer;
+export default CartContentContainer

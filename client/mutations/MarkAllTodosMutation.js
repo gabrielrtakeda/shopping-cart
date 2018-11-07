@@ -1,4 +1,4 @@
-import {commitMutation, graphql} from 'react-relay';
+import { commitMutation, graphql } from 'react-relay'
 
 const mutation = graphql`
   mutation MarkAllTodosMutation($input: MarkAllTodosInput!) {
@@ -13,34 +13,34 @@ const mutation = graphql`
       }
     }
   }
-`;
+`
 
-function getOptimisticResponse(complete, todos, user) {
-  const payload = {viewer: {id: user.id}};
+function getOptimisticResponse (complete, todos, user) {
+  const payload = { viewer: { id: user.id } }
   if (todos && todos.edges) {
     payload.changedTodos = todos.edges
       .filter(edge => edge.node.complete !== complete)
       .map(edge => ({
         complete: complete,
-        id: edge.node.id,
-      }));
+        id: edge.node.id
+      }))
   }
   if (user.totalCount != null) {
-    payload.viewer.completedCount = complete ? user.totalCount : 0;
+    payload.viewer.completedCount = complete ? user.totalCount : 0
   }
   return {
-    markAllTodos: payload,
-  };
+    markAllTodos: payload
+  }
 }
 
-function commit(environment, complete, todos, user) {
+function commit (environment, complete, todos, user) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      input: {complete},
+      input: { complete }
     },
-    optimisticResponse: getOptimisticResponse(complete, todos, user),
-  });
+    optimisticResponse: getOptimisticResponse(complete, todos, user)
+  })
 }
 
-export default {commit};
+export default { commit }

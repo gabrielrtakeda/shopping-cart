@@ -1,6 +1,6 @@
 export default theme => ({
   summary: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2
   },
   totalSummary: {
     borderTop: '1px solid #efefef',
@@ -8,9 +8,9 @@ export default theme => ({
     marginBottom: theme.spacing.unit * 2,
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    textAlign: 'right',
+    textAlign: 'right'
   },
   shipping: {
-    marginBottom: theme.spacing.unit * 2,
-  },
-});
+    marginBottom: theme.spacing.unit * 2
+  }
+})

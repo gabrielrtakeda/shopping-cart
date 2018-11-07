@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import numeral from 'numeral';
+import React from 'react'
+import PropTypes from 'prop-types'
+import numeral from 'numeral'
 
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 const ProductPrice = ({ data: { sale, default: price } }) => (
   <Grid container xs={12} justify='space-between' alignItems='center'>
@@ -18,9 +18,9 @@ const ProductPrice = ({ data: { sale, default: price } }) => (
         </Typography>
       )}
       <Typography variant='h3' paragraph>
-        {sale ?
-          numeral(sale).format('$ 0,0.00') :
-          numeral(price).format('$ 0,0.00')
+        {sale
+          ? numeral(sale).format('$ 0,0.00')
+          : numeral(price).format('$ 0,0.00')
         }
       </Typography>
     </Grid>
@@ -38,15 +38,15 @@ const ProductPrice = ({ data: { sale, default: price } }) => (
       </Typography>
     </Grid>
   </Grid>
-);
+)
 
-const { shape, number } = PropTypes;
+const { shape, number } = PropTypes
 
 ProductPrice.propTypes = {
   data: shape({
     sale: number,
-    default: number,
-  }).isRequired,
-};
+    default: number
+  }).isRequired
+}
 
-export default ProductPrice;
+export default ProductPrice

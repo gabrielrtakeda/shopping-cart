@@ -1,39 +1,39 @@
-import MarkAllTodosMutation from '../mutations/MarkAllTodosMutation';
-import Todo from './Todo';
+import MarkAllTodosMutation from '../mutations/MarkAllTodosMutation'
+import Todo from './Todo'
 
-import React from 'react';
-import {createFragmentContainer, graphql} from 'react-relay';
+import React from 'react'
+import { createFragmentContainer, graphql } from 'react-relay'
 
 class TodoList extends React.Component {
   _handleMarkAllChange = e => {
-    const complete = e.target.checked;
+    const complete = e.target.checked
     MarkAllTodosMutation.commit(
       this.props.relay.environment,
       complete,
       this.props.viewer.todos,
-      this.props.viewer,
-    );
+      this.props.viewer
+    )
   };
-  renderTodos() {
+  renderTodos () {
     return this.props.viewer.todos.edges.map(edge => (
       <Todo key={edge.node.id} todo={edge.node} viewer={this.props.viewer} />
-    ));
+    ))
   }
-  render() {
-    const numTodos = this.props.viewer.totalCount;
-    const numCompletedTodos = this.props.viewer.completedCount;
+  render () {
+    const numTodos = this.props.viewer.totalCount
+    const numCompletedTodos = this.props.viewer.completedCount
     return (
-      <section className="main">
+      <section className='main'>
         <input
           checked={numTodos === numCompletedTodos}
-          className="toggle-all"
+          className='toggle-all'
           onChange={this._handleMarkAllChange}
-          type="checkbox"
+          type='checkbox'
         />
-        <label htmlFor="toggle-all">Mark all as complete</label>
-        <ul className="todo-list">{this.renderTodos()}</ul>
+        <label htmlFor='toggle-all'>Mark all as complete</label>
+        <ul className='todo-list'>{this.renderTodos()}</ul>
       </section>
-    );
+    )
   }
 }
 
@@ -56,5 +56,5 @@ export default createFragmentContainer(TodoList, {
       completedCount
       ...Todo_viewer
     }
-  `,
-});
+  `
+})

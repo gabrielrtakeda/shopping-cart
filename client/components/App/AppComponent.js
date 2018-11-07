@@ -12,11 +12,11 @@ const AppComponent = props => {
       <AppBar market={market} />
       <ProductCardList market={market} />
     </React.Fragment>
-  );
+  )
 }
 
 AppComponent.propTypes = {
-  market: PropTypes.object.isRequired,
+  market: PropTypes.object.isRequired
 }
 
-export default AppComponent;
+export default AppComponent

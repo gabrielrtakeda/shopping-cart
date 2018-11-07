@@ -1,8 +1,8 @@
 import {
   createRefetchContainer,
-  graphql,
-} from 'react-relay';
-import ProductCardListComponent from './ProductCardListComponent';
+  graphql
+} from 'react-relay'
+import ProductCardListComponent from './ProductCardListComponent'
 
 export default createRefetchContainer(
   ProductCardListComponent,
@@ -37,4 +37,4 @@ export default createRefetchContainer(
       }
     }
   `
-);
+)

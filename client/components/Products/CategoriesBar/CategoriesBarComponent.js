@@ -1,55 +1,55 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Typography from '@material-ui/core/Typography'
 import { CategoriesBarContext } from './CategoriesBarContext'
 
-function TabContainer(props) {
+function TabContainer (props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component='div' style={{ padding: 8 * 3 }}>
       {props.children}
     </Typography>
-  );
+  )
 }
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+  children: PropTypes.node.isRequired
+}
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   tabs: {
     flexContainer: {
-      justifyContent: 'center',
+      justifyContent: 'center'
     }
   }
-});
+})
 
 class CategoriesBarComponent extends React.Component {
-  render() {
-    const { classes, market } = this.props;
+  render () {
+    const { classes, market } = this.props
 
     return (
       <div className={classes.root}>
         <CategoriesBarContext.Consumer>
           {({ setCategoryId, categoryId, refetchProducts }) => (
-            <AppBar position="static" color="default">
+            <AppBar position='static' color='default'>
               <Tabs
                 className={classes.tabs}
-                indicatorColor="primary"
+                indicatorColor='primary'
                 onChange={(e, value) => {
-                  refetchProducts(value);
-                  setCategoryId(value);
+                  refetchProducts(value)
+                  setCategoryId(value)
                 }}
                 value={categoryId}
-                textColor="primary"
+                textColor='primary'
                 scrollable
               >
                 <Tab label='Todos' value='all' />
@@ -65,12 +65,12 @@ class CategoriesBarComponent extends React.Component {
           )}
         </CategoriesBarContext.Consumer>
       </div>
-    );
+    )
   }
 }
 
 CategoriesBarComponent.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+  classes: PropTypes.object.isRequired
+}
 
-export default withStyles(styles)(CategoriesBarComponent);
+export default withStyles(styles)(CategoriesBarComponent)

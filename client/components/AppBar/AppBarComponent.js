@@ -1,29 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
-import RestaurantIcon from '@material-ui/icons/Restaurant';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import Badge from '@material-ui/core/Badge'
+import RestaurantIcon from '@material-ui/icons/Restaurant'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 import CartDrawer from '../CartDrawer'
 import SearchBar from './SearchBarComponent'
 
 class AppBarComponent extends React.Component {
   state = {
-    openCartDrawer: false,
+    openCartDrawer: false
   };
 
   handleCartDrawerOpen = openCartDrawer => {
-    this.setState({ openCartDrawer });
+    this.setState({ openCartDrawer })
   };
 
-  render() {
-    const { classes, market } = this.props;
-    const { openCartDrawer } = this.state;
+  render () {
+    const { classes, market } = this.props
+    const { openCartDrawer } = this.state
 
     return (
       <div className={classes.root}>
@@ -56,17 +56,18 @@ class AppBarComponent extends React.Component {
         <CartDrawer
           market={market}
           open={openCartDrawer}
-          handleOpen={::this.handleCartDrawerOpen}
+          handleOpen={this.handleCartDrawerOpen}
         />
       </div>
-    );
+    )
   }
 };
 
-const { object } = PropTypes;
+const { object } = PropTypes
 
 AppBarComponent.propTypes = {
-  market: object.isRequired,
-};
+  classes: object.isRequired,
+  market: object.isRequired
+}
 
-export default AppBarComponent;
+export default AppBarComponent

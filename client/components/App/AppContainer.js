@@ -1,8 +1,8 @@
-import React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import React from 'react'
+import { QueryRenderer, graphql } from 'react-relay'
 
-import environment from '../../services/relay/environment';
-import AppComponent from './AppComponent';
+import environment from '../../services/relay/environment'
+import AppComponent from './AppComponent'
 
 const AppContainerQuery = graphql`
   query AppContainerQuery {
@@ -17,18 +17,18 @@ const AppContainerQuery = graphql`
       }
     }
   }
-`;
+`
 
 const AppContainer = () => (
   <QueryRenderer
     environment={environment}
     query={AppContainerQuery}
     variables={{}}
-    render={({ error, props }) => props ?
-      <AppComponent {...props} /> :
-      <div>Loading</div>
+    render={({ props }) => props
+      ? <AppComponent {...props} />
+      : <div>Loading</div>
     }
   />
-);
+)
 
-export default AppContainer;
+export default AppContainer

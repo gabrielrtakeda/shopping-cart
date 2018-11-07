@@ -1,11 +1,11 @@
 #!/usr/bin/env babel-node
-import fs from 'fs';
-import path from 'path';
-import { schema } from '../data/schema';
-import { printSchema } from 'graphql';
+import fs from 'fs'
+import path from 'path'
+import { schema } from '../data/schema'
+import { printSchema } from 'graphql'
 
-const schemaPath = path.resolve(__dirname, '../data/schema.graphql');
+const schemaPath = path.resolve(__dirname, '../data/schema.graphql')
 
-fs.writeFileSync(schemaPath, printSchema(schema));
+fs.writeFileSync(schemaPath, printSchema(schema))
 
-console.info('Wrote ' + schemaPath);
+console.info('Wrote ' + schemaPath)

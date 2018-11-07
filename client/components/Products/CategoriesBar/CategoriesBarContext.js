@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 export const CategoriesBarContext = React.createContext({
   categoryId: 'all',
   setCategoryId: () => {},
-  refetchProducts: f => f,
-});
+  refetchProducts: f => f
+})

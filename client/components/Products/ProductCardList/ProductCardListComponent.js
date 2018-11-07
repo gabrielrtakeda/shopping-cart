@@ -1,34 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 
 import LayoutContent from '../../LayoutContent'
-import CategoriesBar from '../CategoriesBar/CategoriesBarContainer';
-import ProductCard from '../ProductCard';
+import CategoriesBar from '../CategoriesBar/CategoriesBarContainer'
+import ProductCard from '../ProductCard'
 import HeroBlackFriday from '../HeroBlackFriday/HeroBlackFridayComponent'
 import { CategoriesBarContext } from '../CategoriesBar/CategoriesBarContext'
 
 class ProductCardList extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.setCategoryId = categoryId => {
-      this.setState({ categoryId });
+      this.setState({ categoryId })
     }
 
     this.refetchProducts = categoryId => {
-      this.props.relay.refetch(fragmentVariables => ({ categoryId }));
+      this.props.relay.refetch(fragmentVariables => ({ categoryId }))
     }
 
     this.state = {
       categoryId: 'all',
       setCategoryId: this.setCategoryId,
-      refetchProducts: this.refetchProducts,
-    };
+      refetchProducts: this.refetchProducts
+    }
   }
 
-  render() {
-    const { market } = this.props;
+  render () {
+    const { market } = this.props
 
     return (
       <CategoriesBarContext.Provider value={this.state}>
@@ -49,7 +49,7 @@ class ProductCardList extends React.Component {
 }
 
 ProductCardList.propTypes = {
-  market: PropTypes.object.isRequired,
-};
+  market: PropTypes.object.isRequired
+}
 
-export default ProductCardList;
+export default ProductCardList

@@ -1,3 +1,3 @@
-import CartDrawerComponent from './CartDrawerComponent';
+import CartDrawerComponent from './CartDrawerComponent'
 
-export default CartDrawerComponent;
+export default CartDrawerComponent

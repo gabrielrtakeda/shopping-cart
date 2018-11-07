@@ -1,4 +1,4 @@
-import {commitMutation, graphql} from 'react-relay';
+import { commitMutation, graphql } from 'react-relay'
 
 const mutation = graphql`
   mutation RenameTodoMutation($input: RenameTodoInput!) {
@@ -9,27 +9,27 @@ const mutation = graphql`
       }
     }
   }
-`;
+`
 
-function getOptimisticResponse(text, todo) {
+function getOptimisticResponse (text, todo) {
   return {
     renameTodo: {
       todo: {
         id: todo.id,
-        text: text,
-      },
-    },
-  };
+        text: text
+      }
+    }
+  }
 }
 
-function commit(environment, text, todo) {
+function commit (environment, text, todo) {
   return commitMutation(environment, {
     mutation,
     variables: {
-      input: {text, id: todo.id},
+      input: { text, id: todo.id }
     },
-    optimisticResponse: getOptimisticResponse(text, todo),
-  });
+    optimisticResponse: getOptimisticResponse(text, todo)
+  })
 }
 
-export default {commit};
+export default { commit }

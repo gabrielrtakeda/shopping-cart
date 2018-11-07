@@ -1,8 +1,8 @@
-import React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import React from 'react'
+import { QueryRenderer, graphql } from 'react-relay'
 
-import environment from '../../../services/relay/environment';
-import ProductDetailComponent from './ProductDetailComponent';
+import environment from '../../../services/relay/environment'
+import ProductDetailComponent from './ProductDetailComponent'
 
 const query = graphql`
   query ProductDetailContainerQuery($id: ID!) {
@@ -22,7 +22,7 @@ const query = graphql`
       }
     }
   }
-`;
+`
 
 const ProductDetailContainer = ({ id, ...componentProps }) => (
   <QueryRenderer
@@ -36,6 +36,6 @@ const ProductDetailContainer = ({ id, ...componentProps }) => (
       />
     )}
   />
-);
+)
 
-export default ProductDetailContainer;
+export default ProductDetailContainer
