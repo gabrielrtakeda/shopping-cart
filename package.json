@@ -5,7 +5,8 @@
     "server:start": "babel-node ./server/index.js",
     "build": "relay-compiler --src ./client/ --schema ./server/data/schema.graphql",
     "update-schema": "babel-node ./server/utils/updateSchema.js",
-    "prettier": "find . \\( -name node_modules -o -name __generated__ \\) -prune -or \\( -name '*.js' -o -name '*.css' -o -name '*.json' -o -name '*.md' \\) -print | xargs prettier --write"
+    "prettier": "find . \\( -name node_modules -o -name __generated__ \\) -prune -or \\( -name '*.js' -o -name '*.css' -o -name '*.json' -o -name '*.md' \\) -print | xargs prettier --write",
+    "lint": "./node_modules/.bin/eslint --fix ./client ./server"
   },
   "dependencies": {
     "@babel/core": "^7.0.1",

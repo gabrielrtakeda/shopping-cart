@@ -4,67 +4,49 @@ A project to demonstrate the frontend skills with React, Relay and GraphQL.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development purpose.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+- [NodeJS >= v11.0.0](https://nodejs.org/en/)
+- [Yarn >= v1.7.0](https://yarnpkg.com/en/docs/install) (or npm)
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Clone the repository.
 
 ```
-Give the example
+git clone git@github.com:gabrielrtakeda/shopping-cart.git
 ```
 
-And repeat
+Install the dependencies.
 
 ```
-until finished
+cd shopping-cart && yarn
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Start the server.
 
 ```
-Give an example
+yarn start
 ```
 
-### And coding style tests
+And access [http://localhost:3000](http://localhost:3000) to see the application running.
 
-Explain what these tests test and why
+### Coding style
+
+This project uses [`eslint`](https://github.com/eslint/eslint) and [`standard` with React](https://github.com/standard/eslint-config-standard-react). Run the command below to lint the code. It will show all the lint errors and warning and, will autofix the autofixable issues.
 
 ```
-Give an example
+yarn lint
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* [Express](https://expressjs.com/) - NodeJS framework
+* [React](https://github.com/facebook/react) - Frontend framework
+* [Yarn](https://yarnpkg.com/en/) - Dependency Management
+* [GraphQL](https://graphql.org/) - Backend API query language
 
 ## Versioning
 
@@ -72,16 +54,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Gabriel R Takeda** - [gabrielrtakeda](https://github.com/gabrielrtakeda)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
