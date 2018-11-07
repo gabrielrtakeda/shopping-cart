@@ -44,7 +44,7 @@ class ProductBuyAction extends React.Component {
             fullWidth
             inputProps={{ max: quantity, min: 1, style: { textAlign: 'center' } }}
             value={qty}
-            onChange={::this.handleChange}
+            onChange={this.handleChange}
             error={quantityValidation}
           />
         </Grid>
@@ -80,7 +80,7 @@ class ProductBuyAction extends React.Component {
   }
 }
 
-const { object, shape, string, number, arrayOf } = PropTypes
+const { object, shape, string, number, arrayOf, bool } = PropTypes
 
 ProductBuyAction.propTypes = {
   classes: object.isRequired,
@@ -92,7 +92,8 @@ ProductBuyAction.propTypes = {
     image: string,
     description: string,
     quantity: number
-  }).isRequired
+  }).isRequired,
+  noMargin: bool
 }
 
 export default ProductBuyAction

@@ -48,8 +48,11 @@ class ProductCardList extends React.Component {
   }
 }
 
+const { object } = PropTypes
+
 ProductCardList.propTypes = {
-  market: PropTypes.object.isRequired
+  market: object.isRequired,
+  relay: object.isRequired
 }
 
 export default ProductCardList

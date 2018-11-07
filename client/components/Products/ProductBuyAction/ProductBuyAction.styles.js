@@ -1,5 +1,3 @@
-import red from '@material-ui/core/colors/red'
-
 export default theme => ({
   container: {
     marginTop: theme.spacing.unit * 4,

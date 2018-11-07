@@ -1,19 +1,11 @@
 import React from 'react'
-import numeral from 'numeral'
+import PropTypes from 'prop-types'
 import md5 from 'md5'
 
-import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import MoodBadIcon from '@material-ui/icons/MoodBad'
 
 import ProductPrice from './ProductPrice'
 import ProductBuyAction from '../ProductBuyAction'
@@ -61,6 +53,26 @@ class ProductDetailComponent extends React.Component {
       </Dialog>
     )
   }
+}
+
+const { bool, func, shape, arrayOf, string, number } = PropTypes
+
+ProductDetailComponent.propTypes = {
+  open: bool.isRequired,
+  handleClose: func.isRequired,
+  market: shape({
+    product: shape({
+      attributes: arrayOf(string),
+      description: string,
+      id: string,
+      image: string,
+      name: string,
+      price: shape({
+        default: number,
+        sale: number
+      })
+    })
+  }).isRequired
 }
 
 export default ProductDetailComponent

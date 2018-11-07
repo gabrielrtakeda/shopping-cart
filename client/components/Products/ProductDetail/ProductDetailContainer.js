@@ -29,7 +29,7 @@ const ProductDetailContainer = ({ id, ...componentProps }) => (
     environment={environment}
     query={query}
     variables={{ id }}
-    render={({ error, props }) => (
+    render={({ props }) => (
       <ProductDetailComponent
         {...props}
         {...componentProps}

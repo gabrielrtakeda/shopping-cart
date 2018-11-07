@@ -69,8 +69,18 @@ class CategoriesBarComponent extends React.Component {
   }
 }
 
+const { object, shape, arrayOf, string } = PropTypes
+
 CategoriesBarComponent.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: object.isRequired,
+  market: shape({
+    categories: shape({
+      list: arrayOf(shape({
+        id: string,
+        name: string
+      }))
+    })
+  }).isRequired
 }
 
 export default withStyles(styles)(CategoriesBarComponent)

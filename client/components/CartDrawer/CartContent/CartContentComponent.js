@@ -63,7 +63,7 @@ export const CartContentComponent = ({ classes, handleOpen, cart, relay }) => {
   )
 }
 
-const { object, func, bool, shape, number } = PropTypes
+const { object, func, shape, number } = PropTypes
 
 CartContentComponent.propTypes = {
   classes: object.isRequired,

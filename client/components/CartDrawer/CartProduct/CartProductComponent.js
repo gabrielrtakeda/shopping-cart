@@ -130,7 +130,8 @@ CartProductComponent.propTypes = {
       image: string
     })
   }).isRequired,
-  updateProductInTheCartMutation: func.isRequired
+  updateProductInTheCartMutation: func.isRequired,
+  removeProductFromCartMutation: func.isRequired
 }
 
 export default CartProductComponent

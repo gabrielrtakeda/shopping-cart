@@ -16,8 +16,11 @@ class Layout extends React.Component {
   }
 }
 
+const { object, node, func, oneOfType } = PropTypes
+
 Layout.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: object.isRequired,
+  children: oneOfType([node, func]).isRequired
 }
 
 export default Layout
