@@ -55,7 +55,7 @@ export const CartContentComponent = ({ classes, handleOpen, cart, relay }) => {
       <Grid {...containerProps} alignItems='center' className={classes.totalSummary}>
         <Grid item><Typography variant='h4'>Total</Typography></Grid>
         <Grid item>
-          <Typography variant='headline'>{subtotal}</Typography>
+          <Typography variant='h5'>{subtotal}</Typography>
           <Typography variant='caption'>Em até 3x s/ juros</Typography>
         </Grid>
       </Grid>

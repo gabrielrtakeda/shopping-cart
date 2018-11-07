@@ -21,7 +21,6 @@ export default createRefetchContainer(
             id
             name
             category { name }
-            categoryId
             attributes
             image
             description

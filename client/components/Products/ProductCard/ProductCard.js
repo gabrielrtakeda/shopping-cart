@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import md5 from 'md5';
 
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
@@ -20,8 +21,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ShareIcon from '@material-ui/icons/Share';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import ProductDetail from '../ProductDetail'
-import ProductBuyAction from '../ProductBuyAction'
+import ProductDetail from '../ProductDetail';
+import ProductBuyAction from '../ProductBuyAction';
 
 class ProductCard extends React.Component {
   state = {
@@ -54,9 +55,9 @@ class ProductCard extends React.Component {
                 <Typography gutterBottom variant="subtitle1" noWrap>
                   {data.name}
                 </Typography>
-                <Typography gutterBottom>{data.categoryId}</Typography>
+                <Typography gutterBottom>{data.category.name}</Typography>
                 {data.attributes.map(attribute => (
-                  <Typography color="textSecondary">
+                  <Typography key={`${data.id}${md5(attribute)}`} color="textSecondary">
                     {attribute}
                   </Typography>
                 ))}
@@ -85,7 +86,7 @@ ProductCard.propTypes = {
   data: shape({
     id: string,
     name: string,
-    categoryId: number,
+    category: shape({ name: string }),
     attributes: arrayOf(string),
     image: string,
     description: string,

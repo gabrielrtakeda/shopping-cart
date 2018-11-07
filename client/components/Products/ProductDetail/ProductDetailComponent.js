@@ -1,5 +1,6 @@
 import React from 'react';
 import numeral from 'numeral';
+import md5 from 'md5';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,8 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 
-import ProductPrice from './ProductPrice'
-import ProductBuyAction from '../ProductBuyAction'
+import ProductPrice from './ProductPrice';
+import ProductBuyAction from '../ProductBuyAction';
 
 class ProductDetailComponent extends React.Component {
 
@@ -49,7 +50,7 @@ class ProductDetailComponent extends React.Component {
               </Typography>
 
               {market.product.attributes.map(attribute => (
-                <Typography color="textSecondary">
+                <Typography key={`${market.product.id}${md5(attribute)}`} color="textSecondary">
                   {attribute}
                 </Typography>
               ))}
