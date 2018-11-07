@@ -1,14 +1,3 @@
-input AddTodoInput {
-  text: String!
-  clientMutationId: String
-}
-
-type AddTodoPayload {
-  todoEdge: TodoEdge
-  viewer: User
-  clientMutationId: String
-}
-
 type Cart implements Node {
   """The ID of an object"""
   id: ID!
@@ -67,29 +56,6 @@ type CategoryEdge {
   cursor: String!
 }
 
-input ChangeTodoStatusInput {
-  complete: Boolean!
-  id: ID!
-  clientMutationId: String
-}
-
-type ChangeTodoStatusPayload {
-  todo: Todo
-  viewer: User
-  clientMutationId: String
-}
-
-input MarkAllTodosInput {
-  complete: Boolean!
-  clientMutationId: String
-}
-
-type MarkAllTodosPayload {
-  changedTodos: [Todo]
-  viewer: User
-  clientMutationId: String
-}
-
 type Market implements Node {
   """The ID of an object"""
   id: ID!
@@ -101,12 +67,6 @@ type Market implements Node {
 }
 
 type Mutation {
-  addTodo(input: AddTodoInput!): AddTodoPayload
-  changeTodoStatus(input: ChangeTodoStatusInput!): ChangeTodoStatusPayload
-  markAllTodos(input: MarkAllTodosInput!): MarkAllTodosPayload
-  removeCompletedTodos(input: RemoveCompletedTodosInput!): RemoveCompletedTodosPayload
-  removeTodo(input: RemoveTodoInput!): RemoveTodoPayload
-  renameTodo(input: RenameTodoInput!): RenameTodoPayload
   removeProductFromCart(input: RemoveProductFromCartInput!): RemoveProductFromCartPayload
   updateProductInTheCart(input: UpdateProductInTheCartInput!): UpdateProductInTheCartPayload
 }
@@ -175,7 +135,6 @@ type ProductEdge {
 }
 
 type Query {
-  viewer: User
   categories: CategoryConnection
   market: Market
 
@@ -184,16 +143,6 @@ type Query {
     """The ID of an object"""
     id: ID!
   ): Node
-}
-
-input RemoveCompletedTodosInput {
-  clientMutationId: String
-}
-
-type RemoveCompletedTodosPayload {
-  deletedTodoIds: [String]
-  viewer: User
-  clientMutationId: String
 }
 
 input RemoveProductFromCartInput {
@@ -207,53 +156,6 @@ type RemoveProductFromCartPayload {
   clientMutationId: String
 }
 
-input RemoveTodoInput {
-  id: ID!
-  clientMutationId: String
-}
-
-type RemoveTodoPayload {
-  deletedTodoId: ID
-  viewer: User
-  clientMutationId: String
-}
-
-input RenameTodoInput {
-  id: ID!
-  text: String!
-  clientMutationId: String
-}
-
-type RenameTodoPayload {
-  todo: Todo
-  clientMutationId: String
-}
-
-type Todo implements Node {
-  """The ID of an object"""
-  id: ID!
-  text: String
-  complete: Boolean
-}
-
-"""A connection to a list of items."""
-type TodoConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [TodoEdge]
-}
-
-"""An edge in a connection."""
-type TodoEdge {
-  """The item at the end of the edge"""
-  node: Todo
-
-  """A cursor for use in pagination"""
-  cursor: String!
-}
-
 input UpdateProductInTheCartInput {
   productId: ID!
   quantity: Int!
@@ -265,12 +167,4 @@ type UpdateProductInTheCartPayload {
   item: CartItem
   market: Market
   clientMutationId: String
-}
-
-type User implements Node {
-  """The ID of an object"""
-  id: ID!
-  todos(status: String = "any", after: String, first: Int, before: String, last: Int): TodoConnection
-  totalCount: Int
-  completedCount: Int
 }
