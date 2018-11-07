@@ -28,12 +28,19 @@ class CartProductComponent extends React.Component {
 
   handleClick = event => {
     if (this.validateQuantity(this.state.qty)) {
-      this.props.mutation(
+      this.props.updateProductInTheCartMutation(
         ::this.updatePriceSubtotal,
         this.props.data.product.id,
         this.state.qty,
       );
     }
+  };
+
+  handleClickDeleteButton = event => {
+    this.props.removeProductFromCartMutation(
+      f => { console.log('removeProductFromCartMutation:onComplete') },
+      this.props.data.product.id,
+    );
   };
 
   updatePriceSubtotal = (response) => {
@@ -97,7 +104,7 @@ class CartProductComponent extends React.Component {
               </Typography>
             </Grid>
             <Grid item>
-              <IconButton>
+              <IconButton onClick={this.handleClickDeleteButton}>
                 <DeleteIcon />
               </IconButton>
             </Grid>
@@ -123,7 +130,7 @@ CartProductComponent.propTypes = {
       image: string,
     }),
   }).isRequired,
-  mutation: func.isRequired,
+  updateProductInTheCartMutation: func.isRequired,
 };
 
 export default CartProductComponent

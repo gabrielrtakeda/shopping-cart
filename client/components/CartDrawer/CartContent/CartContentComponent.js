@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import UpdateProductInTheCartMutation from '../../../mutations/UpdateProductInTheCartMutation'
+import RemoveProductFromCartMutation from '../../../mutations/RemoveProductFromCartMutation';
 import CartProduct from '../CartProduct'
 import styles from './CartContentComponent.styles'
 
@@ -17,6 +18,7 @@ const containerProps = {
 };
 
 export const CartContentComponent = ({ classes, handleOpen, cart, relay }) => {
+  const { environment } = relay;
   const subtotal = numeral(cart.totalItemsPrice).format('$ 0,0.00');
 
   return (
@@ -29,7 +31,12 @@ export const CartContentComponent = ({ classes, handleOpen, cart, relay }) => {
         <CartProduct
           key={item.id}
           data={item}
-          mutation={(...args) => UpdateProductInTheCartMutation.commit(relay.environment, ...args)}
+          updateProductInTheCartMutation={(...args) => {
+            UpdateProductInTheCartMutation.commit(environment, ...args);
+          }}
+          removeProductFromCartMutation={(...args) => {
+            RemoveProductFromCartMutation.commit(environment, ...args);
+          }}
         />
       ))}
 

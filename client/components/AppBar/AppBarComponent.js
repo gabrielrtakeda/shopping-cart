@@ -41,9 +41,13 @@ class AppBarComponent extends React.Component {
 
             <div className={classes.shoppingCartMenu}>
               <IconButton color='inherit' onClick={() => this.handleCartDrawerOpen(true)}>
-                <Badge badgeContent={market.cart.totalItemsQuantity} color='secondary'>
+                {market.cart.totalItemsQuantity > 0 ? (
+                  <Badge badgeContent={market.cart.totalItemsQuantity} color='secondary'>
+                    <ShoppingCartIcon />
+                  </Badge>
+                ) : (
                   <ShoppingCartIcon />
-                </Badge>
+                )}
               </IconButton>
             </div>
           </Toolbar>
