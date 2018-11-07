@@ -14,7 +14,7 @@ const mutation = graphql`
   }
 `
 
-function commit (environment, onCompleted, productId, quantity, append) {
+const commit = (environment, onCompleted, productId, quantity, append) => {
   return commitMutation(environment, {
     mutation,
     variables: {
@@ -22,6 +22,6 @@ function commit (environment, onCompleted, productId, quantity, append) {
     },
     onCompleted
   })
-};
+}
 
 export default { commit }

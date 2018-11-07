@@ -1,9 +1,6 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime'
-import { installRelayDevTools } from 'relay-devtools'
 
-installRelayDevTools()
-
-function fetchQuery (operation, variables) {
+const fetchQuery = (operation, variables) => {
   return fetch('/graphql', {
     method: 'POST',
     headers: {

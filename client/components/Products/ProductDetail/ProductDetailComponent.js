@@ -72,7 +72,7 @@ ProductDetailComponent.propTypes = {
         sale: number
       })
     })
-  }).isRequired
+  })
 }
 
 export default ProductDetailComponent
