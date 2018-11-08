@@ -3,6 +3,7 @@ import { QueryRenderer, graphql } from 'react-relay'
 
 import environment from '../../services/relay/environment'
 import AppComponent from './AppComponent'
+import Loading from '../Loading'
 
 const AppContainerQuery = graphql`
   query AppContainerQuery {
@@ -24,10 +25,13 @@ const AppContainer = () => (
     environment={environment}
     query={AppContainerQuery}
     variables={{}}
-    render={({ props }) => props
-      ? <AppComponent {...props} />
-      : <div>Loading</div>
-    }
+    render={({ props }) => {
+      return (
+        props
+          ? <AppComponent {...props} />
+          : <Loading />
+      )
+    }}
   />
 )
 
