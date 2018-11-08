@@ -28,7 +28,7 @@ cd shopping-cart && yarn
 Start the server.
 
 ```
-yarn start
+yarn dev
 ```
 
 And access [http://localhost:3000](http://localhost:3000) to see the application running.
