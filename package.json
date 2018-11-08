@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "relay": "babel-node ./server/utils/updateSchema.js && relay-compiler --src ./client/ --schema ./server/data/schema.graphql",
-    "lint": "./node_modules/.bin/eslint --fix ./client ./server",
+    "lint": "eslint --fix ./client ./server",
     "dev:client": "webpack-dev-server --mode development --config webpack/base.config.js --devtool inline-source-map --hot --env.PLATFORM=local",
     "dev:server": "nodemon server",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "prod:build": "webpack --mode production --config webpack/prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress",
-    "prod:start": "node server",
+    "prod:start": "babel-node server",
     "prestart": "npm run relay && npm run prod:build",
     "start": "npm run prod:start"
   },
