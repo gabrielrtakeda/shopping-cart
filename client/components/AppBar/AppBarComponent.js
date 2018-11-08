@@ -30,7 +30,7 @@ class AppBarComponent extends React.Component {
         <AppBar position='static'>
           <Toolbar>
             <IconButton className={classes.menuButton} color='inherit'>
-              <RestaurantIcon />
+              <img src='/logo-white.png' width='32' />
             </IconButton>
 
             <Typography className={classes.title} variant='h6' color='inherit' noWrap>
