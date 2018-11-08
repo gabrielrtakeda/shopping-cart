@@ -1,45 +1,17 @@
-import express from 'express'
-import graphQLHTTP from 'express-graphql'
-import path from 'path'
-import webpack from 'webpack'
-import WebpackDevServer from 'webpack-dev-server'
-import { schema } from './data/schema'
+const express = require('express')
+const graphQLHTTP = require('express-graphql')
+const path = require('path')
+const http = require('http')
+const schema = require('./data/schema').schema
 
-const APP_PORT = 3000
+const SERVER_PORT = process.env.PORT || 8080
 
-// Serve the Relay app
-const compiler = webpack({
-  mode: 'development',
-  entry: ['whatwg-fetch', path.resolve(__dirname, '..', 'client', 'index.js')],
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /\/node_modules\//,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
-      }
-    ]
-  },
-  output: {
-    filename: 'bundle.js',
-    path: '/'
-  }
-})
+const app = express()
 
-const app = new WebpackDevServer(compiler, {
-  contentBase: '/public/',
-  publicPath: '/',
-  stats: { colors: true }
-})
-
-// Serve static resources
-app.use('/', express.static(path.resolve(__dirname, '..', 'public')))
+// Point static path to dist
+const dist = path.join(__dirname, '..', 'dist')
+app.use('/', express.static(dist))
+app.use('/dist', express.static(dist))
 
 // Setup GraphQL endpoint
 app.use(
@@ -51,6 +23,10 @@ app.use(
   })
 )
 
-app.listen(APP_PORT, () => {
-  console.info(`App is now running on http://localhost:${APP_PORT}`)
-})
+/** Get port from environment and store in Express. */
+app.set('port', SERVER_PORT)
+
+/** Create HTTP server. */
+const server = http.createServer(app)
+/** Listen on provided port, on all network interfaces. */
+server.listen(SERVER_PORT, () => console.log(`Server Running on port ${SERVER_PORT}`))

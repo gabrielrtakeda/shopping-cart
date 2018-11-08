@@ -2,15 +2,19 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "start": "yarn update-schema && yarn build && yarn server:start",
-    "server:start": "babel-node ./server/index.js",
-    "build": "relay-compiler --src ./client/ --schema ./server/data/schema.graphql",
-    "update-schema": "babel-node ./server/utils/updateSchema.js",
-    "prettier": "find . \\( -name node_modules -o -name __generated__ \\) -prune -or \\( -name '*.js' -o -name '*.css' -o -name '*.json' -o -name '*.md' \\) -print | xargs prettier --write",
-    "lint": "./node_modules/.bin/eslint --fix ./client ./server"
+    "relay": "babel-node ./server/utils/updateSchema.js && relay-compiler --src ./client/ --schema ./server/data/schema.graphql",
+    "lint": "./node_modules/.bin/eslint --fix ./client ./server",
+    "dev:client": "webpack-dev-server --mode development --config webpack/base.config.js --devtool inline-source-map --hot --env.PLATFORM=local",
+    "dev:server": "nodemon server",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "prod:build": "webpack --mode production --config webpack/prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress",
+    "prod:start": "node server",
+    "prestart": "npm run relay && npm run prod:build",
+    "start": "npm run prod:start"
   },
   "dependencies": {
     "@babel/core": "^7.0.1",
+    "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
     "@babel/plugin-proposal-function-bind": "^7.0.0",
@@ -26,6 +30,7 @@
     "babel-loader": "^8.0.2",
     "babel-plugin-relay": "^1.7.0",
     "classnames": "2.2.6",
+    "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^4.0.1",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^1.0.1",
@@ -36,7 +41,6 @@
     "html-webpack-plugin": "^3.2.0",
     "md5": "^2.2.1",
     "mini-css-extract-plugin": "^0.4.3",
-    "node-sass": "^4.8.3",
     "nodemon": "^1.18.6",
     "normalize.css": "^8.0.0",
     "numeral": "^2.0.6",
@@ -45,7 +49,7 @@
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-relay": "^1.7.0",
-    "sass-loader": "^7.0.3",
+    "relay-compiler": "^1.7.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.18.0",
@@ -65,13 +69,6 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.11.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "relay-compiler": "^1.7.0"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "bracketSpacing": false,
-    "jsxBracketSameLine": true
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
