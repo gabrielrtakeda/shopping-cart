@@ -25,15 +25,19 @@ export const getCategory = id => {
   return categoriesById[id]
 }
 
+export const getCategoryIdByName = name => {
+  return Object.keys(categoriesById).find(id => categoriesById[id].name === name)
+}
+
 // Mock `Categories` data
-addCategory('U.S.')
 addCategory('Belgium')
-addCategory('Bebidas')
-addCategory('Cafeteria')
-addCategory('Carnes')
-addCategory('Casa de Sucos')
-addCategory('Comida Alemã')
-addCategory('Comida Árabe')
-addCategory('Comida Asiática')
-addCategory('Comida Brasileira')
-addCategory('Comida Contemporânea')
+addCategory('Canada')
+addCategory('Denmark')
+addCategory('England')
+addCategory('France')
+addCategory('Germany')
+addCategory('Greece')
+addCategory('Norway')
+addCategory('Poland')
+addCategory('Sweden')
+addCategory('U.S.')
